@@ -15,15 +15,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
       - name: Add To Community Project
         if: fromJSON(steps.is-longhorn-member.outputs.teams)[0] == null
-        uses: actions/add-to-project@v0.3.0
-        id: add-to-community-project
+        uses: leonsteinhaeuser/project-beta-automations@v1.2.1
         with:
-          project-url: https://github.com/orgs/yyz-field/projects/1
-          github-token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
-      - name: Update Status To New
-        uses: kalgurn/update-project-item-status@main
-        with:
-          project-url: https://github.com/orgs/yyz-field/projects/1
-          github-token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
-          item-id: ${{ steps.add-to-community-project.outputs.itemId }}
-          status: New
+          gh_token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+          organization: yyz-field
+          project_id: 1
+          resource_node_id: ${{ github.event.issue.node_id }}
+          status_value: New
