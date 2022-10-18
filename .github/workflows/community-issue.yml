@@ -14,15 +14,8 @@ jobs:
           organization: yyz-field
           GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
       - name: Add To Community Project
-        if: fromJSON(steps.is-longhorn-member.outputs.teams)[0] == null
-        uses: actions/add-to-project@v0.3.0
+        uses: technote-space/create-project-card-action@v1
         with:
-          project-url: https://github.com/orgs/yyz-field/projects/1
-          github-token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
-      - name: Update Status To New
-        if: fromJSON(steps.is-longhorn-member.outputs.teams)[0] == null
-        uses: docker://takanabe/github-actions-automate-projects:v0.0.1
-        env:
+          PROJECT: project1
+          COLUMN: New
           GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
-          GITHUB_PROJECT_URL: https://github.com/orgs/yyz-field/projects/1
-          GITHUB_PROJECT_COLUMN_NAME: New
