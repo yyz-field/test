@@ -15,13 +15,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
       - name: Add To Community Project
         if: fromJSON(steps.is-longhorn-member.outputs.teams)[0] == null
-        uses: actions/add-to-project@v0.3.0
+        uses: alex-page/github-project-automation-plus@v0.8.1
         with:
-          project-url: https://github.com/orgs/yyz-field/projects/1
-          github-token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
-      - name: Comment Issue
-        uses: ben-z/actions-comment-on-issue@1.0.2
-        with:
-          message: "@yyz-field/qa"
-          GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
-
+          project: project1
+          column: New
+          repo-token: ${{ secrets.CUSTOM_GITHUB_TOKEN_2 }}
+          action: add
