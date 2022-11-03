@@ -1,7 +1,7 @@
 name: Community-Issue
 on:
   issues:
-    types: [opened]
+    types: [opened, labeled]
 jobs:
   community:
     runs-on: ubuntu-latest
@@ -19,3 +19,14 @@ jobs:
         with:
           project-url: https://github.com/orgs/yyz-field/projects/1
           github-token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add To QA & Devops Project
+        uses: actions/add-to-project@v0.3.0
+        with:
+          project-url: https://github.com/orgs/yyz-field/projects/1
+          github-token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+          labeled: kind/test, area/test-infra
+          label-operator: OR
