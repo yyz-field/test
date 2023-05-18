@@ -21,7 +21,7 @@ jobs:
           diff=$(git diff --name-only HEAD^ HEAD)
           echo "$diff"
           # Check if k8s/crds.yaml has been changed
-          changed=$(echo $diff | grep k8s/crds.yaml)
+          changed=$(echo $diff | grep k8s/crds.yaml || true)
           echo "$changed"
           echo "::set-output name=changed::$changed"
       # Run the step only with "changed" equals "True"
