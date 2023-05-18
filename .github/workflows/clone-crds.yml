@@ -34,3 +34,5 @@ jobs:
           source_folder: k8s/crds.yaml
           destination_repo: 'yyz-field/copy'
           destination_folder: chart/templates/crds.yaml
+          destination_base_branch: master
+          destination_head_branch: github-actions-clone-crds-yaml
