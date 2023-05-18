@@ -36,3 +36,5 @@ jobs:
           destination_folder: chart/templates/crds.yaml
           destination_base_branch: master
           destination_head_branch: github-actions-clone-crds-yaml
+          user_email: github-actions@example.com
+          user_name: github-actions
