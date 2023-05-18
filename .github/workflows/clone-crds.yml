@@ -1,0 +1,27 @@
+name: Clone-Crds
+on:
+  push:
+    branches:
+      - master
+jobs:
+  diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+        with:
+          # Checkout as many commits as needed for the diff
+          fetch-depth: 2
+      - name: Diff Commits
+        # Give an id to the step, so we can reference it later
+        id: diff-commits
+        run: |
+          # Diff HEAD with the previous commit
+          diff=$(git diff --name-only HEAD^ HEAD)
+          # Check if k8s/crds.yaml has been changed
+          changed=$(echo $diff | grep k8s/crds.yaml)
+          echo "::set-output name=changed::$changed"
+      # Run the step only with "changed" equals "True"
+      - name: Create Pull Request
+        if: steps.diff-commits.outputs.changed
+        run: ls -al
