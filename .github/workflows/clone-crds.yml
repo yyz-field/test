@@ -27,7 +27,7 @@ jobs:
       # Run the step only with "changed" equals "True"
       - name: Create Pull Request
         if: steps.diff-commits.outputs.changed
-        uses: paygoc6/action-pull-request-another-repo@v1.0.5
+        uses: paygoc6/action-pull-request-another-repo@v1.0.1
         env:
           API_TOKEN_GITHUB: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
         with:
