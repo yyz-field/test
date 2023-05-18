@@ -27,4 +27,10 @@ jobs:
       # Run the step only with "changed" equals "True"
       - name: Create Pull Request
         if: steps.diff-commits.outputs.changed
-        run: ls -al
+        uses: paygoc6/action-pull-request-another-repo@v1.0.5
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+        with:
+          source_folder: k8s/crds.yaml
+          destination_repo: 'yyz-field/copy'
+          destination_folder: chart/templates/crds.yaml
