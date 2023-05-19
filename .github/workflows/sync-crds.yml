@@ -40,5 +40,6 @@ jobs:
           destination: chart/templates/crds.yaml
           destination_base_branch: master
           destination_head_branch: sync-crds-${{ steps.diff-commits.outputs.hash }}
+          pull_request_reviewers: 'yyz-field/qa'
           pr_title: steps.diff-commits.outputs.message
           commit_msg: steps.diff-commits.outputs.message
