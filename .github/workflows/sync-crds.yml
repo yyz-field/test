@@ -32,7 +32,7 @@ jobs:
       # Run the step only with "changed" equals "True"
       - name: Create Pull Request
         if: steps.diff-commits.outputs.changed
-        uses: yangchiu/bot/copy-files-and-create-pr-action@master
+        uses: yangchiu/bot/copy-files-and-create-pr-action@copy-crds
         env:
           API_TOKEN_GITHUB: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
         with:
