@@ -39,7 +39,7 @@ jobs:
           source: k8s/crds.yaml
           destination_repo: 'yyz-field/copy'
           destination: chart/templates/crds.yaml
-          destination_base_branch: ${{ env.GITHUB_REF_NAME }}
+          destination_base_branch: ${{ env.GITHUB_REF }}
           destination_head_branch: sync-crds-${{ steps.diff-commits.outputs.hash }}
           pull_request_reviewers: 'yyz-field/qa'
           pr_title: ${{ steps.diff-commits.outputs.message }}
