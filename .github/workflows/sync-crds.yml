@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - "v*.*.*"
 jobs:
   diff:
     runs-on: ubuntu-latest
