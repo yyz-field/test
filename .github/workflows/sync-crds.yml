@@ -34,7 +34,7 @@ jobs:
         if: steps.diff-commits.outputs.changed
         uses: yangchiu/bot/copy-files-and-create-pr-action@copy-crds
         env:
-          API_TOKEN_GITHUB: ${{ secrets.CUSTOM_GITHUB_TOKE }}
+          API_TOKEN_GITHUB: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
         with:
           source: k8s/crds.yaml
           destination_repo: 'yyz-field/copy'
