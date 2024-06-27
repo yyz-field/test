@@ -31,7 +31,7 @@ jobs:
         syft longhornio/longhorn-manager:v1.6.0 -o json --platform=linux/amd64 > sbom/longhorn-manager:v1.6.0-amd64.sbom
     - name: Sign SBOM
       run: |
-        cosign sign-blob -y longhorn-manager:v1.6.0-amd64.sbom --key env://COSIGN_PRIVATE_KEY
+        cosign sign-blob -y sbom/longhorn-manager:v1.6.0-amd64.sbom --key env://COSIGN_PRIVATE_KEY
       env:
         COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
     - name: Tar Assets
