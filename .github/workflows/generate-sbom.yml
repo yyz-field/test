@@ -23,11 +23,10 @@ jobs:
         syft longhornio/longhorn-manager:v1.6.0 -o json --platform=linux/amd64 > longhorn-manager:v1.6.0-amd64.sbom
     - name: Generate Key
       run: |
-        cosign generate-key-pair github://$REPO_OWNER/$REPO_NAME
+        cosign generate-key-pair github://$REPO_NAME
       env:
         COSIGN_PASSWORD: ""
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        REPO_OWNER: ${{ github.repository_owner }}
         REPO_NAME: ${{ github.repository }}
     - name: Sign SBOM
       run: |
