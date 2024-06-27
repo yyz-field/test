@@ -18,13 +18,11 @@ jobs:
         curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin
     - name: Install Cosign
       uses: sigstore/cosign-installer@v3.5.0
-#    - name: Generate Key
-#      run: |
-#        cosign generate-key-pair github://$REPO_NAME
-#      env:
-#        COSIGN_PASSWORD: ""
-#        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-#        REPO_NAME: ${{ github.repository }}
+    - name: Generate Key
+      run: |
+        cosign generate-key-pair
+      env:
+        COSIGN_PASSWORD: ""
     - name: Generate SBOM
       run: |
         mkdir sbom
@@ -33,9 +31,7 @@ jobs:
     - name: Sign SBOM
       run: |
         echo $COSIGN_PRIVATE_KEY > sbom/cosign.key
-        cosign sign-blob -y sbom/longhorn-manager-v1.6.0-amd64.sbom --key env://COSIGN_PRIVATE_KEY --output sbom/longhorn-manager-v1.6.0-amd64.sig
-      env:
-        COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+        cosign sign-blob -y sbom/longhorn-manager-v1.6.0-amd64.sbom --key cosign.key --output sbom/longhorn-manager-v1.6.0-amd64.sig
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
