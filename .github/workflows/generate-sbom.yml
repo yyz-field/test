@@ -36,6 +36,10 @@ jobs:
         cosign sign-blob -y sbom/longhorn-manager-v1.6.0-amd64.sbom --key env://COSIGN_PRIVATE_KEY --output sbom/longhorn-manager-v1.6.0-amd64.sig
       env:
         COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        path: sbom
     - name: Verify SBOM
       run: |
         cosign verify-blob --key sbom/cosign.pub --signature $(cat sbom/longhorn-manager-v1.6.0-amd64.sig) sbom/longhorn-manager-v1.6.0-amd64.sbom
@@ -43,7 +47,3 @@ jobs:
 #      run: |
 #        cp cosign.pub sbom/cosign.pub
 #        tar zcvf sbom.tar.gz sbom
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        path: sbom
