@@ -27,6 +27,8 @@ jobs:
       env:
         COSIGN_PASSWORD: ""
         GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        REPO_OWNER: ${{ github.repository_owner }}
+        REPO_NAME: ${{ github.repository }}
     - name: Sign SBOM
       run: |
         cosign sign-blob -y longhorn-manager:v1.6.0-amd64.sbom --key env://COSIGN_PRIVATE_KEY
