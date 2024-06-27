@@ -28,17 +28,17 @@ jobs:
     - name: Generate SBOM
       run: |
         mkdir sbom
-        syft longhornio/longhorn-manager:v1.6.0 -o json --platform=linux/amd64 > sbom/longhorn-manager:v1.6.0-amd64.sbom
+        syft longhornio/longhorn-manager:v1.6.0 -o json --platform=linux/amd64 > sbom/longhorn-manager-v1.6.0-amd64.sbom
     - name: Sign SBOM
       run: |
-        cosign sign-blob -y sbom/longhorn-manager:v1.6.0-amd64.sbom --key env://COSIGN_PRIVATE_KEY
+        cosign sign-blob -y sbom/longhorn-manager-v1.6.0-amd64.sbom --key env://COSIGN_PRIVATE_KEY --output sbom/longhorn-manager-v1.6.0-amd64.sig
       env:
         COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
-    - name: Tar Assets
-      run: |
-        cp cosign.pub sbom/cosign.pub
-        tar zcvf sbom.tar.gz sbom
-    - name: Update Artifact
+#    - name: Tar Assets
+#      run: |
+#        cp cosign.pub sbom/cosign.pub
+#        tar zcvf sbom.tar.gz sbom
+    - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        path: sbom.tar.gz
+        path: sbom
