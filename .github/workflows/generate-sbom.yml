@@ -32,6 +32,7 @@ jobs:
         syft longhornio/longhorn-manager:v1.6.0 -o json --platform=linux/amd64 > sbom/longhorn-manager-v1.6.0-amd64.sbom
     - name: Sign SBOM
       run: |
+        echo $COSIGN_PRIVATE_KEY > sbom/cosign.key
         cosign sign-blob -y sbom/longhorn-manager-v1.6.0-amd64.sbom --key env://COSIGN_PRIVATE_KEY --output sbom/longhorn-manager-v1.6.0-amd64.sig
       env:
         COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
