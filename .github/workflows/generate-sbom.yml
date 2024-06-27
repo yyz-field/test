@@ -28,6 +28,7 @@ jobs:
     - name: Generate SBOM
       run: |
         mkdir sbom
+        cp cosign.pub sbom/cosign.pub
         syft longhornio/longhorn-manager:v1.6.0 -o json --platform=linux/amd64 > sbom/longhorn-manager-v1.6.0-amd64.sbom
     - name: Sign SBOM
       run: |
