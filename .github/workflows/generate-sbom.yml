@@ -37,7 +37,7 @@ jobs:
         COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
     - name: Verify SBOM
       run: |
-        cosign verify-blob --key sbom/cosign.pub --signature $(cat longhorn-manager-v1.6.0-amd64.sig) longhorn-manager-v1.6.0-amd64.sbom
+        cosign verify-blob --key sbom/cosign.pub --signature $(cat sbom/longhorn-manager-v1.6.0-amd64.sig) longhorn-manager-v1.6.0-amd64.sbom
 #    - name: Tar Assets
 #      run: |
 #        cp cosign.pub sbom/cosign.pub
