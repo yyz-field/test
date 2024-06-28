@@ -31,7 +31,9 @@ jobs:
           IMAGE_NAME="${IMAGE#*/}"
           FILE_PREFIX="${IMAGE_NAME//:/-}"
           syft -q "${IMAGE}" -o json --platform=linux/amd64 > "sbom/${FILE_PREFIX}-amd64.sbom"
-          syft -q "${IMAGE}" -o json --platform=linux/arm64 > "sbom/${FILE_PREFIX}-arm64.sbom"
+          if [[ "${IMAGE}" != *"openshift-origin-oauth-proxy"* ]]; then
+            syft -q "${IMAGE}" -o json --platform=linux/arm64 > "sbom/${FILE_PREFIX}-arm64.sbom"
+          fi
         done < "${LONGHORN_IMAGES_FILE}"
     - name: Sign SBOM
       run: |
