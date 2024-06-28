@@ -60,4 +60,4 @@ jobs:
       uses: AButler/upload-release-assets@v3.0
       with:
         files: sbom.tar.gz
-        repo-token: ${{ github.token }}
+        repo-token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
