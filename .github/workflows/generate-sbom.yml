@@ -26,20 +26,30 @@ jobs:
     - name: Generate SBOM
       run: |
         mkdir sbom
-        cp cosign.pub sbom/cosign.pub
-        syft longhornio/longhorn-manager:v1.6.0 -o json --platform=linux/amd64 > sbom/longhorn-manager-v1.6.0-amd64.sbom
+        LONGHORN_IMAGES_FILE=deploy/longhorn-images.txt
+        while read -r IMAGE; do
+          IMAGE_NAME="${IMAGE#*/}"
+          FILE_PREFIX="${IMAGE_NAME//:/-}"
+          syft -q "${IMAGE}" -o json --platform=linux/amd64 > "sbom/${FILE_PREFIX}-amd64.sbom"
+          syft -q "${IMAGE}" -o json --platform=linux/arm64 > "sbom/${FILE_PREFIX}-arm64.sbom"
+        done < "${LONGHORN_IMAGES_FILE}"
     - name: Sign SBOM
       run: |
-        echo $COSIGN_PRIVATE_KEY > sbom/cosign.key
-        cosign sign-blob -y sbom/longhorn-manager-v1.6.0-amd64.sbom --key cosign.key --output sbom/longhorn-manager-v1.6.0-amd64.sig
+        for SBOM_FILE in "sbom"/*; do
+          SIG_FILE_NAME="${SBOM_FILE%.*}.sig"
+          cosign sign-blob -y "${SBOM_FILE}" --key cosign.key --output-signature "${SIG_FILE_NAME}"
+        done
+    - name: Verify SBOM
+        run: |
+          for SBOM_FILE in "sbom"/*.sbom
+          do
+            SIG_FILE_NAME="${SBOM_FILE%.*}.sig"
+            cosign verify-blob --key cosign.pub --signature "$(cat "${SIG_FILE_NAME}")" "${SBOM_FILE}"
+          done
+    - name: Ship Public Key
+      run: |
+        cp cosign.pub sbom/cosign.pub
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         path: sbom
-    - name: Verify SBOM
-      run: |
-        cosign verify-blob --key sbom/cosign.pub --signature $(cat sbom/longhorn-manager-v1.6.0-amd64.sig) sbom/longhorn-manager-v1.6.0-amd64.sbom
-#    - name: Tar Assets
-#      run: |
-#        cp cosign.pub sbom/cosign.pub
-#        tar zcvf sbom.tar.gz sbom
