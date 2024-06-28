@@ -40,12 +40,11 @@ jobs:
           cosign sign-blob -y "${SBOM_FILE}" --key cosign.key --output-signature "${SIG_FILE_NAME}"
         done
     - name: Verify SBOM
-        run: |
-          for SBOM_FILE in "sbom"/*.sbom
-          do
-            SIG_FILE_NAME="${SBOM_FILE%.*}.sig"
-            cosign verify-blob --key cosign.pub --signature "$(cat "${SIG_FILE_NAME}")" "${SBOM_FILE}"
-          done
+      run: |
+        for SBOM_FILE in "sbom"/*.sbom; do
+          SIG_FILE_NAME="${SBOM_FILE%.*}.sig"
+          cosign verify-blob --key cosign.pub --signature "$(cat "${SIG_FILE_NAME}")" "${SBOM_FILE}"
+        done
     - name: Ship Public Key
       run: |
         cp cosign.pub sbom/cosign.pub
