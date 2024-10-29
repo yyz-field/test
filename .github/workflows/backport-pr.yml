@@ -45,7 +45,7 @@ jobs:
       - name: Get the original issue title
         if: env.BACKPORT == 'true'
         id: original-issue-title
-        run: echo "::set-output title=$(echo '${{ fromJson(steps.original-issue.outputs.data) }}' | jq -r '.title')"
+        run: echo "ISSUE_TITLE=${{ steps.original-issue.outputs.title }}" >> $GITHUB_ENV
           
       - name: Find corresponding backport issue
         if: env.BACKPORT == 'true'
@@ -53,12 +53,12 @@ jobs:
         uses: octokit/request-action@v2.x
         with:
           route: GET /search/issues
-          q: 'repo:longhorn/longhorn is:issue is:open in:title ${{ steps.extract.outputs.branch }} ${{ steps.original-issue-title.outputs.title }}'
+          q: 'repo:longhorn/longhorn is:issue is:open in:title ${{ steps.extract.outputs.branch }} ${{ env.ISSUE_TITLE }}'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Link the PR with the corresponding backport issue
-        if: env.BACKPORT == 'true' && fromJson(steps.search-issue.outputs.data).total_count > 0
+        if: env.BACKPORT == 'true' && fromJson(steps.find-backport-issue.outputs.data).total_count > 0
         run: |
           # Relate the pull request to the backport issue
           gh issue comment ${{ fromJson(steps.find-backport-issue.outputs.data).items[0].number }} --body "Related PR: ${{ github.event.pull_request.html_url }}"
