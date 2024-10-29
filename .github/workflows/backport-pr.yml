@@ -30,7 +30,7 @@ jobs:
           echo "::set-output name=branch::${BRANCH_NAME}"
 
           # Extract issue number from the PR description
-          ISSUE_NUMBER=$(echo "${{ github.event.pull_request.body }}" | grep -oE 'longhorn/longhorn#[0-9]+' | sed 's/longhorn\/longhorn#//g')
+          ISSUE_NUMBER=$(echo "${{ github.event.pull_request.body }}" | grep -oE 'issues/[0-9]+' | cut -d'/' -f2)
           echo "::set-output name=issue_number::${ISSUE_NUMBER}"
 
       - name: Get the original issue
