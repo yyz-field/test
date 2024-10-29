@@ -796,64 +796,64 @@
 <p>Trigger the following scenarios then confirm or rollback the migration:</p>
 <hr>
 <table>
-<thead>
-<tr>
-<th><strong>#</strong></th>
-<th><strong>Scenario</strong></th>
-<th><strong>Migration Confirmation</strong></th>
-<th><strong>Migration Rollback</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>New engine crash</td>
-<td>If the request is successfully sent before the migration engine &amp; replicas being removed, the volume should be auto reattached after migration. <br> Otherwise, the request will be rejected until the volume is reattached and restarts the migration components</td>
-<td>Should succeed</td>
-</tr>
-<tr>
-<td>2</td>
-<td>All new replica crash</td>
-<td>If the request is successfully sent before the migration engine &amp; replicas being removed, the volume should keep running (then may start rebuilding) after migration. <br> Otherwise, the request will be rejected until the volume is reattached and restarts the migration components</td>
-<td>Should succeed</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Old engine crash</td>
-<td>If the request is successfully sent before the volume becoming Faulted, the volume should keep running after migration. <br> Otherwise, the request will be rejected until the volume is reattached and restarts the migration components</td>
-<td>Should succeed</td>
-</tr>
-<tr>
-<td>4</td>
-<td>All old replica crash</td>
-<td>If the request is successfully sent before the volume becoming Faulted, the volume should keep running (then may start rebuilding) after migration. <br> Otherwise, the request will be rejected until the volume is reattached and restarts the migration components</td>
-<td>Should succeed</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Degraded volume</td>
-<td>Should succeed</td>
-<td>Should succeed</td>
-</tr>
-<tr>
-<td>6</td>
-<td>One replica node down</td>
-<td>Should succeed</td>
-<td>Should succeed</td>
-</tr>
-<tr>
-<td>7</td>
-<td>New engine node down</td>
-<td>The request should be rejected</td>
-<td>Should succeed</td>
-</tr>
-<tr>
-<td>8</td>
-<td>Old engine node down</td>
-<td>The request should be rejected</td>
-<td>The request should be accepted. But the volume should keep state Unknown after the rollback since it&rsquo;s on a down node.</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th><strong>#</strong></th>
+          <th><strong>Scenario</strong></th>
+          <th><strong>Migration Confirmation</strong></th>
+          <th><strong>Migration Rollback</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>New engine crash</td>
+          <td>If the request is successfully sent before the migration engine &amp; replicas being removed, the volume should be auto reattached after migration. <br> Otherwise, the request will be rejected until the volume is reattached and restarts the migration components</td>
+          <td>Should succeed</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>All new replica crash</td>
+          <td>If the request is successfully sent before the migration engine &amp; replicas being removed, the volume should keep running (then may start rebuilding) after migration. <br> Otherwise, the request will be rejected until the volume is reattached and restarts the migration components</td>
+          <td>Should succeed</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>Old engine crash</td>
+          <td>If the request is successfully sent before the volume becoming Faulted, the volume should keep running after migration. <br> Otherwise, the request will be rejected until the volume is reattached and restarts the migration components</td>
+          <td>Should succeed</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>All old replica crash</td>
+          <td>If the request is successfully sent before the volume becoming Faulted, the volume should keep running (then may start rebuilding) after migration. <br> Otherwise, the request will be rejected until the volume is reattached and restarts the migration components</td>
+          <td>Should succeed</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>Degraded volume</td>
+          <td>Should succeed</td>
+          <td>Should succeed</td>
+      </tr>
+      <tr>
+          <td>6</td>
+          <td>One replica node down</td>
+          <td>Should succeed</td>
+          <td>Should succeed</td>
+      </tr>
+      <tr>
+          <td>7</td>
+          <td>New engine node down</td>
+          <td>The request should be rejected</td>
+          <td>Should succeed</td>
+      </tr>
+      <tr>
+          <td>8</td>
+          <td>Old engine node down</td>
+          <td>The request should be rejected</td>
+          <td>The request should be accepted. But the volume should keep state Unknown after the rollback since it&rsquo;s on a down node.</td>
+      </tr>
+  </tbody>
 </table>
 <p>Note:</p>
 <ol>

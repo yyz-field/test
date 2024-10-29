@@ -783,45 +783,45 @@
     <article id="content">
        <h2 id="accessibility-of-longhorn-ui">Accessibility of Longhorn UI</h2>
 <table>
-<thead>
-<tr>
-<th><strong>#</strong></th>
-<th><strong>Test Case</strong></th>
-<th><strong>Test Instructions</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1.</td>
-<td>Access Longhorn UI using rancher proxy</td>
-<td>1.  Create a cluster (3 worker nodes and 1 etcd/control plane) in rancher, Go to the default project.<br>2.  Go to App, Click the launch app.<br>3.  Select longhorn.<br>4.  Select <code>Rancher-Proxy</code> under the Longhorn UI service.<br>5.  Once the app is deployed successfully, click the <a href="https://173.255.255.35/k8s/clusters/c-qnl4b/api/v1/namespaces/longhorn-system/services/http:longhorn-frontend:80/proxy/">/index.html</a> link appears in App page.<br>6.  The page should redirect to longhorn UI - <a href="https://173.255.255.35/k8s/clusters/c-qnl4b/api/v1/namespaces/longhorn-system/services/http:longhorn-frontend:80/proxy/#/dashboard">https://rancher/k8s/clusters/c-aaaa/api/v1/namespaces/longhorn-system/services/http:longhorn-frontend:80/proxy/#/dashboard</a><br>7.  Verify all the pages, refresh each page and verify. Create a volume and check the volume detail page also.</td>
-</tr>
-<tr>
-<td>2.</td>
-<td>Access Longhorn UI under Kubectl proxy</td>
-<td>1.  Create a cluster (3 worker nodes and 1 etcd/control plane) using rke.<br>2.  Start kubectl proxy by command <code>kubectl proxy</code>.<br>3.  It should start proxy locally on 8001 port.<br>4.  Navigate to <a href="http://localhost:8001/api/v1/namespaces/longhorn-system/services/http:longhorn-frontend:http/proxy/">http://localhost:8001/api/v1/namespaces/longhorn-system/services/http:longhorn-frontend:http/proxy/</a><br>5.  The above link should open the longhorn UI.<br>6.  Verify all the pages, refresh each page and verify. Create a volume and check the volume detail page also.</td>
-</tr>
-<tr>
-<td>3.</td>
-<td>Access Longhorn UI with node port</td>
-<td>1.  Create a cluster (3 worker nodes and 1 etcd/control plane) in rancher, Go to the default project.<br>2.  Go to App, Click the launch app.<br>3.  Select longhorn.<br>4.  Select <code>NodePort</code> under the Longhorn UI service.<br>5.  Once the app is deployed successfully, click the link like <a href="http://104.131.80.163:32059/">32059/tcp</a> appears in App page.<br>6.  The page should redirect to longhorn UI - <a href="http://104.131.80.163:32059/#/dashboard">http://node-ip:32059/#/dashboard</a><br>7.  Verify all the pages, refresh each page and verify. Create a volume and check the volume detail page also.</td>
-</tr>
-<tr>
-<td>4.</td>
-<td>Access Longhorn UI with ingress controller</td>
-<td>1.  Create a cluster(3 worker nodes and 1 etcd/control plane).<br>2.  Deploy longhorn.<br>3.  Create ingress controller. refer <a href="https://longhorn.io/docs/1.0.1/deploy/accessing-the-ui/longhorn-ingress/">https://longhorn.io/docs/1.0.1/deploy/accessing-the-ui/longhorn-ingress/</a><br>4.  If cluster is imported/created in rancher create ingress using rancher UI by selecting <code>Target Backend</code> as <code>longhorn frontend</code> and path <code>/</code><br>5.  Access the ingress. It should redirect to longhorn UI.<br>6.  Verify all the pages, refresh each page and verify. Create a volume and check the volume detail page also.</td>
-</tr>
-<tr>
-<td>5.</td>
-<td>Access Longhorn UI with a load balancer</td>
-<td>1.  Create a cluster (3 worker nodes and 1 etcd/control plane) in rancher.<br>2.  Create a route 53 entry pointing to worker nodes of the cluster in AWS.<br>3.  Deploy longhorn from catalog library and mention the route 53 entry in the load balancer.<br>4.  Go to the link that appears on the app page for the longhorn app.<br>5.  The page to redirect to longhorn UI with URL as route 53 entry.<br>6.  Verify all the pages, refresh each page and verify. Create a volume and check the volume detail page also.</td>
-</tr>
-<tr>
-<td>6.</td>
-<td>Access Longhorn UI with reverse proxy</td>
-<td>1.  Create a cluster (3 worker nodes and 1 etcd/control plane) in rancher, Go to the default project.<br>2.  Go to App, Click the launch app.<br>3.  Select longhorn.<br>4.  Select <code>NodePort</code> under the Longhorn UI service.<br>5.  Install nginx in local system.<br>6.  Set the <code>proxy_pass</code> of <a href="http://104.131.80.163:32059/#/dashboard">http://node-ip:32059</a> in ngnix.conf file as per below example.<br>7.  Start nginx<br>8.  Access the port given in <code>listen</code> parameter from nginx.conf. ex - //localhost:822<br>9.  The page should redirect to longhorn UI<br>10.  Verify all the pages, refresh each page and verify. Create a volume and check the volume detail page also.</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th><strong>#</strong></th>
+          <th><strong>Test Case</strong></th>
+          <th><strong>Test Instructions</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1.</td>
+          <td>Access Longhorn UI using rancher proxy</td>
+          <td>1.  Create a cluster (3 worker nodes and 1 etcd/control plane) in rancher, Go to the default project.<br>2.  Go to App, Click the launch app.<br>3.  Select longhorn.<br>4.  Select <code>Rancher-Proxy</code> under the Longhorn UI service.<br>5.  Once the app is deployed successfully, click the <a href="https://173.255.255.35/k8s/clusters/c-qnl4b/api/v1/namespaces/longhorn-system/services/http:longhorn-frontend:80/proxy/">/index.html</a> link appears in App page.<br>6.  The page should redirect to longhorn UI - <a href="https://173.255.255.35/k8s/clusters/c-qnl4b/api/v1/namespaces/longhorn-system/services/http:longhorn-frontend:80/proxy/#/dashboard">https://rancher/k8s/clusters/c-aaaa/api/v1/namespaces/longhorn-system/services/http:longhorn-frontend:80/proxy/#/dashboard</a><br>7.  Verify all the pages, refresh each page and verify. Create a volume and check the volume detail page also.</td>
+      </tr>
+      <tr>
+          <td>2.</td>
+          <td>Access Longhorn UI under Kubectl proxy</td>
+          <td>1.  Create a cluster (3 worker nodes and 1 etcd/control plane) using rke.<br>2.  Start kubectl proxy by command <code>kubectl proxy</code>.<br>3.  It should start proxy locally on 8001 port.<br>4.  Navigate to <a href="http://localhost:8001/api/v1/namespaces/longhorn-system/services/http:longhorn-frontend:http/proxy/">http://localhost:8001/api/v1/namespaces/longhorn-system/services/http:longhorn-frontend:http/proxy/</a><br>5.  The above link should open the longhorn UI.<br>6.  Verify all the pages, refresh each page and verify. Create a volume and check the volume detail page also.</td>
+      </tr>
+      <tr>
+          <td>3.</td>
+          <td>Access Longhorn UI with node port</td>
+          <td>1.  Create a cluster (3 worker nodes and 1 etcd/control plane) in rancher, Go to the default project.<br>2.  Go to App, Click the launch app.<br>3.  Select longhorn.<br>4.  Select <code>NodePort</code> under the Longhorn UI service.<br>5.  Once the app is deployed successfully, click the link like <a href="http://104.131.80.163:32059/">32059/tcp</a> appears in App page.<br>6.  The page should redirect to longhorn UI - <a href="http://104.131.80.163:32059/#/dashboard">http://node-ip:32059/#/dashboard</a><br>7.  Verify all the pages, refresh each page and verify. Create a volume and check the volume detail page also.</td>
+      </tr>
+      <tr>
+          <td>4.</td>
+          <td>Access Longhorn UI with ingress controller</td>
+          <td>1.  Create a cluster(3 worker nodes and 1 etcd/control plane).<br>2.  Deploy longhorn.<br>3.  Create ingress controller. refer <a href="https://longhorn.io/docs/1.0.1/deploy/accessing-the-ui/longhorn-ingress/">https://longhorn.io/docs/1.0.1/deploy/accessing-the-ui/longhorn-ingress/</a><br>4.  If cluster is imported/created in rancher create ingress using rancher UI by selecting <code>Target Backend</code> as <code>longhorn frontend</code> and path <code>/</code><br>5.  Access the ingress. It should redirect to longhorn UI.<br>6.  Verify all the pages, refresh each page and verify. Create a volume and check the volume detail page also.</td>
+      </tr>
+      <tr>
+          <td>5.</td>
+          <td>Access Longhorn UI with a load balancer</td>
+          <td>1.  Create a cluster (3 worker nodes and 1 etcd/control plane) in rancher.<br>2.  Create a route 53 entry pointing to worker nodes of the cluster in AWS.<br>3.  Deploy longhorn from catalog library and mention the route 53 entry in the load balancer.<br>4.  Go to the link that appears on the app page for the longhorn app.<br>5.  The page to redirect to longhorn UI with URL as route 53 entry.<br>6.  Verify all the pages, refresh each page and verify. Create a volume and check the volume detail page also.</td>
+      </tr>
+      <tr>
+          <td>6.</td>
+          <td>Access Longhorn UI with reverse proxy</td>
+          <td>1.  Create a cluster (3 worker nodes and 1 etcd/control plane) in rancher, Go to the default project.<br>2.  Go to App, Click the launch app.<br>3.  Select longhorn.<br>4.  Select <code>NodePort</code> under the Longhorn UI service.<br>5.  Install nginx in local system.<br>6.  Set the <code>proxy_pass</code> of <a href="http://104.131.80.163:32059/#/dashboard">http://node-ip:32059</a> in ngnix.conf file as per below example.<br>7.  Start nginx<br>8.  Access the port given in <code>listen</code> parameter from nginx.conf. ex - //localhost:822<br>9.  The page should redirect to longhorn UI<br>10.  Verify all the pages, refresh each page and verify. Create a volume and check the volume detail page also.</td>
+      </tr>
+  </tbody>
 </table>
 <p>nginx.conf example</p>
 <pre><code>`events { worker_connections` `1024``; }`
@@ -902,80 +902,80 @@
 </li>
 </ol>
 <table>
-<thead>
-<tr>
-<th><strong>#</strong></th>
-<th><strong>Test Case</strong></th>
-<th><strong>Test Instructions</strong></th>
-<th><strong>Expected Results</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Volume Diagram</td>
-<td>*   Verify Volume Diagram</td>
-<td>*   At all time, Volume Diagram should correctly reflect the number and state of Longhorn Volumes (Healthy, Degraded, In Progress, Fault, Detached)</td>
-</tr>
-<tr>
-<td>2</td>
-<td>Storage Diagram</td>
-<td>*   Verify Storage Diagram</td>
-<td>*   At all time, Storage Diagram should correctly reflect Disks Storage status (Schedulable, Reserved, Used, Disabled)</td>
-</tr>
-<tr>
-<td>3</td>
-<td>Node Diagram</td>
-<td>*   Verify Node Diagram</td>
-<td>*   At all time, Volume Diagram should correctly reflect the number and state of Longhorn Nodes (Schedulable, Unschedulable, Down, Disabled)</td>
-</tr>
-<tr>
-<td>4</td>
-<td>Event Logs</td>
-<td>*   Verify Event Logs</td>
-<td>*   Make sure Longhorn events shows up in Event Logs.</td>
-</tr>
-<tr>
-<td>5</td>
-<td>Longhorn Version</td>
-<td>*   Verify the version</td>
-<td>*   Make sure the version is correct</td>
-</tr>
-<tr>
-<td>6</td>
-<td>Support Bundle Link</td>
-<td>*   Click the SupportBundle link</td>
-<td>*   A pop up to enter issue id and description should appear.<br>*   On saving the form, the support bundle file should be generated and downloaded</td>
-</tr>
-<tr>
-<td>7</td>
-<td>Other links at bottom of the page</td>
-<td>*   Click links Documentation, File an issue and Slack</td>
-<td>*   Make sure the navigation of the Document, File an issue and Slack are correct.</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th><strong>#</strong></th>
+          <th><strong>Test Case</strong></th>
+          <th><strong>Test Instructions</strong></th>
+          <th><strong>Expected Results</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>Volume Diagram</td>
+          <td>*   Verify Volume Diagram</td>
+          <td>*   At all time, Volume Diagram should correctly reflect the number and state of Longhorn Volumes (Healthy, Degraded, In Progress, Fault, Detached)</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>Storage Diagram</td>
+          <td>*   Verify Storage Diagram</td>
+          <td>*   At all time, Storage Diagram should correctly reflect Disks Storage status (Schedulable, Reserved, Used, Disabled)</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>Node Diagram</td>
+          <td>*   Verify Node Diagram</td>
+          <td>*   At all time, Volume Diagram should correctly reflect the number and state of Longhorn Nodes (Schedulable, Unschedulable, Down, Disabled)</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>Event Logs</td>
+          <td>*   Verify Event Logs</td>
+          <td>*   Make sure Longhorn events shows up in Event Logs.</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>Longhorn Version</td>
+          <td>*   Verify the version</td>
+          <td>*   Make sure the version is correct</td>
+      </tr>
+      <tr>
+          <td>6</td>
+          <td>Support Bundle Link</td>
+          <td>*   Click the SupportBundle link</td>
+          <td>*   A pop up to enter issue id and description should appear.<br>*   On saving the form, the support bundle file should be generated and downloaded</td>
+      </tr>
+      <tr>
+          <td>7</td>
+          <td>Other links at bottom of the page</td>
+          <td>*   Click links Documentation, File an issue and Slack</td>
+          <td>*   Make sure the navigation of the Document, File an issue and Slack are correct.</td>
+      </tr>
+  </tbody>
 </table>
 <h2 id="additional-tests">Additional Tests</h2>
 <table>
-<thead>
-<tr>
-<th><strong>Test case</strong></th>
-<th><strong>Steps</strong></th>
-<th><strong>Expected Results</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Sort in the columns</td>
-<td>Verify sorting happens correctly in the columns</td>
-<td></td>
-</tr>
-<tr>
-<td>Filter</td>
-<td>Verify Filter on different columns work</td>
-<td></td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th><strong>Test case</strong></th>
+          <th><strong>Steps</strong></th>
+          <th><strong>Expected Results</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Sort in the columns</td>
+          <td>Verify sorting happens correctly in the columns</td>
+          <td></td>
+      </tr>
+      <tr>
+          <td>Filter</td>
+          <td>Verify Filter on different columns work</td>
+          <td></td>
+      </tr>
+  </tbody>
 </table>
 
     </article>

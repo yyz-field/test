@@ -924,100 +924,100 @@ prometheus: prometheus</pre></li>
 <li>Find the <code>prometheus</code> service and access Prometheus web UI using the nodeIP and the port</li>
 </ol>
 <table>
-<thead>
-<tr>
-<th></th>
-<th><strong>Test Scenario</strong></th>
-<th><strong>Test Steps</strong></th>
-<th><strong>Expected results</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>All the Metrics are present</td>
-<td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Go to Prometheus web UI.&lt;/pre<br>2.  Verify the metrics are available.</td>
-<td>The below metrics should be available:<br><br>1.  longhorn_volume_capacity_bytes&lt;/pre<br>2.  longhorn_volume_usage_bytes&lt;/pre<br>3.  longhorn_node_status&lt;/pre<br>4.  onghorn_instance_manager_cpu_requests_millicpu&lt;/pre<br>5.  longhorn_instance_manager_cpu_usage_millicpu&lt;/pre<br>6.  longhorn_instance_manager_memory_requests_bytes&lt;/pre<br>7.  longhorn_instance_manager_memory_usage_bytes&lt;/pre<br>8.  longhorn_manager_cpu_usage_millicpu&lt;/pre<br>9.  longhorn_manager_memory_usage_bytes&lt;/pre<br>10.  longhorn_disk_capacity_bytes&lt;/pre<br>11.  longhorn_disk_usage_bytes&lt;/pre<br>12.  longhorn_node_capacity_bytes&lt;/pre<br>13.  longhorn_node_usage_bytes</td>
-</tr>
-<tr>
-<td>2</td>
-<td>longhorn_volume_capacity_bytes</td>
-<td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create 4 volumes of different sizes. (2, 3, 4, 5 Gi)&lt;/pre<br>2.  Attach 1st volume to a pod and write 1 Gi data into it.&lt;/pre<br>3.  Attach 2nd volume to a pod and don’t write into.&lt;/pre<br>4.  Leave the 3rd volume to the detached state.&lt;/pre<br>5.  Attach the 4th volume to pod and write 1.5 Gi data into it. Detach the volume.&lt;/pre<br>6.  Go to Prometheus web UI.&lt;/pre<br>7.  Select <code>longhorn_volume_capacity_bytes</code> and execute.</td>
-<td>1.  All the volumes should be identified by Prometheus&lt;/pre<br>2.  All the volumes should show the capacity as 2 Gi</td>
-</tr>
-<tr>
-<td>3</td>
-<td>longhorn_volume_usage_bytes</td>
-<td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create 4 volumes of different sizes. (2, 3, 4, 5 Gi)&lt;/pre<br>2.  Attach 1st volume to a pod and write 1 Gi data into it.&lt;/pre<br>3.  Attach 2nd volume to a pod and don’t write into.&lt;/pre<br>4.  Leave the 3rd volume to the detached state.&lt;/pre<br>5.  Attach the 4th volume to pod and write 1.5 Gi data into it. Detach the volume.&lt;/pre<br>6.  Go to Prometheus web UI.&lt;/pre<br>7.  Select <code>longhorn_volume_usage_bytes</code> and execute.</td>
-<td>1.  All the volumes should be identified by Prometheus&lt;/pre<br>2.  Volume-1 should show 1 Gi&lt;/pre<br>3.  Volume-2 should show 0 Gi&lt;/pre<br>4.  Volume-3 should show 0 Gi&lt;/pre<br>5.  Volume-4 should show 1.5 Gi</td>
-</tr>
-<tr>
-<td>4</td>
-<td>longhorn_node_status</td>
-<td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Power down a node.&lt;/pre<br>2.  Disable a node.&lt;/pre<br>3.  Add a new node in the cluster.&lt;/pre<br>4.  Delete a node from the cluster.&lt;/pre<br>5.  Go to Prometheus web UI.&lt;/pre<br>6.  Select <code>longhorn_node_status</code> and execute.</td>
-<td>1.  All the nodes should be identified by Prometheus and one node should be shown in 3 rows based on the condition - <code>mountpropagation, ready, schedulable</code>&lt;/pre<br>2.  The correct status should be shown on Prometheus UI.</td>
-</tr>
-<tr>
-<td>5</td>
-<td>longhorn_instance_manager_cpu_requests_millicpu</td>
-<td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create a volume and attach it to a pod.&lt;/pre<br>2.  Write 1 Gi data into it.&lt;/pre<br>3.  Set multiple recurring backup on the volume.&lt;/pre<br>4.  Go to Prometheus web UI.&lt;/pre<br>5.  Select <code>longhorn_instance_manager_cpu_requests_millicpu</code> and execute.</td>
-<td>1.  The reading of cpu_requests should go up for the attached instance manager.&lt;/pre<br>2.  The reading of other instance managers should not get impacted.</td>
-</tr>
-<tr>
-<td>6</td>
-<td>longhorn_instance_manager_cpu_usage_millicpu</td>
-<td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create a volume and attach it to a pod.&lt;/pre<br>2.  Write 1 Gi data into it.&lt;/pre<br>3.  Set multiple recurring backup on the volume.&lt;/pre<br>4.  Go to Prometheus web UI.&lt;/pre<br>5.  Select <code>longhorn_instance_manager_cpu_usage_millicpu</code> and execute.</td>
-<td>1.  The reading of cpu_usage should be shown correctly&lt;/pre<br>2.  The reading of other instance managers should not get impacted.</td>
-</tr>
-<tr>
-<td>7</td>
-<td>longhorn_instance_manager_memory_requests_bytes</td>
-<td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create a volume and attach it to a pod.&lt;/pre<br>2.  Write 1 Gi data into it.&lt;/pre<br>3.  Set multiple recurring backup on the volume.&lt;/pre<br>4.  Go to Prometheus web UI.&lt;/pre<br>5.  Select <code>longhorn_instance_manager_memory_requests_bytes</code> and execute.</td>
-<td>1.  The reading of memory_requests should go up for the attached instance manager.&lt;/pre<br>2.  The reading of other instance managers should not get impacted.</td>
-</tr>
-<tr>
-<td>8</td>
-<td>longhorn_instance_manager_memory_usage_bytes</td>
-<td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create a volume and attach it to a pod.&lt;/pre<br>2.  Write 1 Gi data into it.&lt;/pre<br>3.  Set multiple recurring backup on the volume.&lt;/pre<br>4.  Go to Prometheus web UI.&lt;/pre<br>5.  Select <code>longhorn_instance_manager_memory_usage_bytes</code> and execute.</td>
-<td>1.  The reading of memory_usage should go up for the attached instance manager.&lt;/pre<br>2.  The reading of other instance managers should not get impacted.</td>
-</tr>
-<tr>
-<td>9</td>
-<td>longhorn_manager_cpu_usage_millicpu</td>
-<td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create 3 volumes of different sizes.&lt;/pre<br>2.  Attach 1st volume to a pod and write 1 Gi data into it.&lt;/pre<br>3.  Leave the 2rd volume to the detached state.&lt;/pre<br>4.  Attach the 3th volume to pod and write 1.5 Gi data into it. Attach the volume in maintenance mode.&lt;/pre<br>5.  Set a recurring backup on volume 1st.&lt;/pre<br>6.  Perform revert to snapshot with 3rd volume.&lt;/pre<br>7.  Go to Prometheus web UI.&lt;/pre<br>8.  Select <code>longhorn_manager_cpu_usage_millicpu</code> and execute.</td>
-<td>1.  Monitor the graph and the console on the Prometheus server, the cpu_usage should go up.</td>
-</tr>
-<tr>
-<td>10</td>
-<td>longhorn_manager_memory_usage_bytes</td>
-<td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create 3 volumes of different sizes.&lt;/pre<br>2.  Attach 1st volume to a pod and write 1 Gi data into it.&lt;/pre<br>3.  Leave the 2rd volume to the detached state.&lt;/pre<br>4.  Attach the 3th volume to pod and write 1.5 Gi data into it. Attach the volume in maintenance mode.&lt;/pre<br>5.  Set a recurring backup on volume 1st.&lt;/pre<br>6.  Perform revert to snapshot with 3rd volume.&lt;/pre<br>7.  Try to make disk full of a node where <code>longhorn-manager</code> is running.&lt;/pre<br>8.  Go to Prometheus web UI.&lt;/pre<br>9.  Select <code>longhorn_manager_memory_usage_bytes</code> and execute.</td>
-<td>1.  Monitor the graph and the console on the Prometheus server, the memory_usage should go up.</td>
-</tr>
-<tr>
-<td>11</td>
-<td>longhorn_disk_capacity_bytes</td>
-<td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create volumes and attach them to each node.&lt;/pre<br>2.  Add an additional disk to all the nodes. (Different size)&lt;/pre<br>3.  Write into the volumes.&lt;/pre<br>4.  Power down a node.&lt;/pre<br>5.  Disable a node.&lt;/pre<br>6.  Add a new node in the cluster.&lt;/pre<br>7.  Delete a node from the cluster.&lt;/pre<br>8.  Go to Prometheus web UI.&lt;/pre<br>9.  Select <code>longhorn_disk_capacity_bytes</code> and execute.</td>
-<td>1.  All the disks should be identified by Prometheus.&lt;/pre<br>2.  All the disks should show the correct total size of the disks.</td>
-</tr>
-<tr>
-<td>12</td>
-<td>longhorn_disk_usage_bytes</td>
-<td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create volumes and attach them to each node.&lt;/pre<br>2.  Add an additional disk to all the nodes. (Different size)&lt;/pre<br>3.  Write into the volumes.&lt;/pre<br>4.  Power down a node.&lt;/pre<br>5.  Disable a node.&lt;/pre<br>6.  Add a new node in the cluster.&lt;/pre<br>7.  Delete a node from the cluster.&lt;/pre<br>8.  Go to Prometheus web UI.&lt;/pre<br>9.  Select <code>longhorn_disk_usage_bytes</code> and execute.</td>
-<td>1.  All the disks should be identified by Prometheus.&lt;/pre<br>2.  All the disks should show the occupied size of the disks.</td>
-</tr>
-<tr>
-<td>13</td>
-<td>longhorn_node_capacity_bytes</td>
-<td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create volumes and attach them to each node.&lt;/pre<br>2.  Add an additional disk to all the nodes. (Different size)&lt;/pre<br>3.  Write into the volumes.&lt;/pre<br>4.  Power down a node.&lt;/pre<br>5.  Disable a node.&lt;/pre<br>6.  Add a new node in the cluster.&lt;/pre<br>7.  Delete a node from the cluster.&lt;/pre<br>8.  Go to Prometheus web UI.&lt;/pre<br>9.  Select <code>longhorn_node_capacity_bytes</code> and execute.</td>
-<td>1.  All the nodes should be identified by Prometheus.&lt;/pre<br>2.  All the nodes should show the total capacity available of disks available.</td>
-</tr>
-<tr>
-<td>14</td>
-<td>longhorn_node_usage_bytes</td>
-<td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create volumes and attach them to each node.&lt;/pre<br>2.  Add an additional disk to all the nodes. (Different size)&lt;/pre<br>3.  Write into the volumes.&lt;/pre<br>4.  Power down a node.&lt;/pre<br>5.  Disable a node.&lt;/pre<br>6.  Add a new node in the cluster.&lt;/pre<br>7.  Delete a node from the cluster.&lt;/pre<br>8.  Go to Prometheus web UI.&lt;/pre<br>9.  Select <code>longhorn_node_usage_bytes</code> and execute.</td>
-<td>1.  All the nodes should be identified by Prometheus&lt;/pre<br>2.  All the nodes should show the occupied space on all disks attached to the node.</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th></th>
+          <th><strong>Test Scenario</strong></th>
+          <th><strong>Test Steps</strong></th>
+          <th><strong>Expected results</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>All the Metrics are present</td>
+          <td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Go to Prometheus web UI.&lt;/pre<br>2.  Verify the metrics are available.</td>
+          <td>The below metrics should be available:<br><br>1.  longhorn_volume_capacity_bytes&lt;/pre<br>2.  longhorn_volume_usage_bytes&lt;/pre<br>3.  longhorn_node_status&lt;/pre<br>4.  onghorn_instance_manager_cpu_requests_millicpu&lt;/pre<br>5.  longhorn_instance_manager_cpu_usage_millicpu&lt;/pre<br>6.  longhorn_instance_manager_memory_requests_bytes&lt;/pre<br>7.  longhorn_instance_manager_memory_usage_bytes&lt;/pre<br>8.  longhorn_manager_cpu_usage_millicpu&lt;/pre<br>9.  longhorn_manager_memory_usage_bytes&lt;/pre<br>10.  longhorn_disk_capacity_bytes&lt;/pre<br>11.  longhorn_disk_usage_bytes&lt;/pre<br>12.  longhorn_node_capacity_bytes&lt;/pre<br>13.  longhorn_node_usage_bytes</td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>longhorn_volume_capacity_bytes</td>
+          <td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create 4 volumes of different sizes. (2, 3, 4, 5 Gi)&lt;/pre<br>2.  Attach 1st volume to a pod and write 1 Gi data into it.&lt;/pre<br>3.  Attach 2nd volume to a pod and don’t write into.&lt;/pre<br>4.  Leave the 3rd volume to the detached state.&lt;/pre<br>5.  Attach the 4th volume to pod and write 1.5 Gi data into it. Detach the volume.&lt;/pre<br>6.  Go to Prometheus web UI.&lt;/pre<br>7.  Select <code>longhorn_volume_capacity_bytes</code> and execute.</td>
+          <td>1.  All the volumes should be identified by Prometheus&lt;/pre<br>2.  All the volumes should show the capacity as 2 Gi</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>longhorn_volume_usage_bytes</td>
+          <td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create 4 volumes of different sizes. (2, 3, 4, 5 Gi)&lt;/pre<br>2.  Attach 1st volume to a pod and write 1 Gi data into it.&lt;/pre<br>3.  Attach 2nd volume to a pod and don’t write into.&lt;/pre<br>4.  Leave the 3rd volume to the detached state.&lt;/pre<br>5.  Attach the 4th volume to pod and write 1.5 Gi data into it. Detach the volume.&lt;/pre<br>6.  Go to Prometheus web UI.&lt;/pre<br>7.  Select <code>longhorn_volume_usage_bytes</code> and execute.</td>
+          <td>1.  All the volumes should be identified by Prometheus&lt;/pre<br>2.  Volume-1 should show 1 Gi&lt;/pre<br>3.  Volume-2 should show 0 Gi&lt;/pre<br>4.  Volume-3 should show 0 Gi&lt;/pre<br>5.  Volume-4 should show 1.5 Gi</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>longhorn_node_status</td>
+          <td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Power down a node.&lt;/pre<br>2.  Disable a node.&lt;/pre<br>3.  Add a new node in the cluster.&lt;/pre<br>4.  Delete a node from the cluster.&lt;/pre<br>5.  Go to Prometheus web UI.&lt;/pre<br>6.  Select <code>longhorn_node_status</code> and execute.</td>
+          <td>1.  All the nodes should be identified by Prometheus and one node should be shown in 3 rows based on the condition - <code>mountpropagation, ready, schedulable</code>&lt;/pre<br>2.  The correct status should be shown on Prometheus UI.</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>longhorn_instance_manager_cpu_requests_millicpu</td>
+          <td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create a volume and attach it to a pod.&lt;/pre<br>2.  Write 1 Gi data into it.&lt;/pre<br>3.  Set multiple recurring backup on the volume.&lt;/pre<br>4.  Go to Prometheus web UI.&lt;/pre<br>5.  Select <code>longhorn_instance_manager_cpu_requests_millicpu</code> and execute.</td>
+          <td>1.  The reading of cpu_requests should go up for the attached instance manager.&lt;/pre<br>2.  The reading of other instance managers should not get impacted.</td>
+      </tr>
+      <tr>
+          <td>6</td>
+          <td>longhorn_instance_manager_cpu_usage_millicpu</td>
+          <td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create a volume and attach it to a pod.&lt;/pre<br>2.  Write 1 Gi data into it.&lt;/pre<br>3.  Set multiple recurring backup on the volume.&lt;/pre<br>4.  Go to Prometheus web UI.&lt;/pre<br>5.  Select <code>longhorn_instance_manager_cpu_usage_millicpu</code> and execute.</td>
+          <td>1.  The reading of cpu_usage should be shown correctly&lt;/pre<br>2.  The reading of other instance managers should not get impacted.</td>
+      </tr>
+      <tr>
+          <td>7</td>
+          <td>longhorn_instance_manager_memory_requests_bytes</td>
+          <td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create a volume and attach it to a pod.&lt;/pre<br>2.  Write 1 Gi data into it.&lt;/pre<br>3.  Set multiple recurring backup on the volume.&lt;/pre<br>4.  Go to Prometheus web UI.&lt;/pre<br>5.  Select <code>longhorn_instance_manager_memory_requests_bytes</code> and execute.</td>
+          <td>1.  The reading of memory_requests should go up for the attached instance manager.&lt;/pre<br>2.  The reading of other instance managers should not get impacted.</td>
+      </tr>
+      <tr>
+          <td>8</td>
+          <td>longhorn_instance_manager_memory_usage_bytes</td>
+          <td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create a volume and attach it to a pod.&lt;/pre<br>2.  Write 1 Gi data into it.&lt;/pre<br>3.  Set multiple recurring backup on the volume.&lt;/pre<br>4.  Go to Prometheus web UI.&lt;/pre<br>5.  Select <code>longhorn_instance_manager_memory_usage_bytes</code> and execute.</td>
+          <td>1.  The reading of memory_usage should go up for the attached instance manager.&lt;/pre<br>2.  The reading of other instance managers should not get impacted.</td>
+      </tr>
+      <tr>
+          <td>9</td>
+          <td>longhorn_manager_cpu_usage_millicpu</td>
+          <td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create 3 volumes of different sizes.&lt;/pre<br>2.  Attach 1st volume to a pod and write 1 Gi data into it.&lt;/pre<br>3.  Leave the 2rd volume to the detached state.&lt;/pre<br>4.  Attach the 3th volume to pod and write 1.5 Gi data into it. Attach the volume in maintenance mode.&lt;/pre<br>5.  Set a recurring backup on volume 1st.&lt;/pre<br>6.  Perform revert to snapshot with 3rd volume.&lt;/pre<br>7.  Go to Prometheus web UI.&lt;/pre<br>8.  Select <code>longhorn_manager_cpu_usage_millicpu</code> and execute.</td>
+          <td>1.  Monitor the graph and the console on the Prometheus server, the cpu_usage should go up.</td>
+      </tr>
+      <tr>
+          <td>10</td>
+          <td>longhorn_manager_memory_usage_bytes</td>
+          <td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create 3 volumes of different sizes.&lt;/pre<br>2.  Attach 1st volume to a pod and write 1 Gi data into it.&lt;/pre<br>3.  Leave the 2rd volume to the detached state.&lt;/pre<br>4.  Attach the 3th volume to pod and write 1.5 Gi data into it. Attach the volume in maintenance mode.&lt;/pre<br>5.  Set a recurring backup on volume 1st.&lt;/pre<br>6.  Perform revert to snapshot with 3rd volume.&lt;/pre<br>7.  Try to make disk full of a node where <code>longhorn-manager</code> is running.&lt;/pre<br>8.  Go to Prometheus web UI.&lt;/pre<br>9.  Select <code>longhorn_manager_memory_usage_bytes</code> and execute.</td>
+          <td>1.  Monitor the graph and the console on the Prometheus server, the memory_usage should go up.</td>
+      </tr>
+      <tr>
+          <td>11</td>
+          <td>longhorn_disk_capacity_bytes</td>
+          <td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create volumes and attach them to each node.&lt;/pre<br>2.  Add an additional disk to all the nodes. (Different size)&lt;/pre<br>3.  Write into the volumes.&lt;/pre<br>4.  Power down a node.&lt;/pre<br>5.  Disable a node.&lt;/pre<br>6.  Add a new node in the cluster.&lt;/pre<br>7.  Delete a node from the cluster.&lt;/pre<br>8.  Go to Prometheus web UI.&lt;/pre<br>9.  Select <code>longhorn_disk_capacity_bytes</code> and execute.</td>
+          <td>1.  All the disks should be identified by Prometheus.&lt;/pre<br>2.  All the disks should show the correct total size of the disks.</td>
+      </tr>
+      <tr>
+          <td>12</td>
+          <td>longhorn_disk_usage_bytes</td>
+          <td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create volumes and attach them to each node.&lt;/pre<br>2.  Add an additional disk to all the nodes. (Different size)&lt;/pre<br>3.  Write into the volumes.&lt;/pre<br>4.  Power down a node.&lt;/pre<br>5.  Disable a node.&lt;/pre<br>6.  Add a new node in the cluster.&lt;/pre<br>7.  Delete a node from the cluster.&lt;/pre<br>8.  Go to Prometheus web UI.&lt;/pre<br>9.  Select <code>longhorn_disk_usage_bytes</code> and execute.</td>
+          <td>1.  All the disks should be identified by Prometheus.&lt;/pre<br>2.  All the disks should show the occupied size of the disks.</td>
+      </tr>
+      <tr>
+          <td>13</td>
+          <td>longhorn_node_capacity_bytes</td>
+          <td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create volumes and attach them to each node.&lt;/pre<br>2.  Add an additional disk to all the nodes. (Different size)&lt;/pre<br>3.  Write into the volumes.&lt;/pre<br>4.  Power down a node.&lt;/pre<br>5.  Disable a node.&lt;/pre<br>6.  Add a new node in the cluster.&lt;/pre<br>7.  Delete a node from the cluster.&lt;/pre<br>8.  Go to Prometheus web UI.&lt;/pre<br>9.  Select <code>longhorn_node_capacity_bytes</code> and execute.</td>
+          <td>1.  All the nodes should be identified by Prometheus.&lt;/pre<br>2.  All the nodes should show the total capacity available of disks available.</td>
+      </tr>
+      <tr>
+          <td>14</td>
+          <td>longhorn_node_usage_bytes</td>
+          <td><strong>Pre-requisite:</strong><br><br>1.  Prometheus is setup is done and Prometheus web UI is accessible.&lt;/pre<br><br><strong>Test Steps:</strong><br><br>1.  Create volumes and attach them to each node.&lt;/pre<br>2.  Add an additional disk to all the nodes. (Different size)&lt;/pre<br>3.  Write into the volumes.&lt;/pre<br>4.  Power down a node.&lt;/pre<br>5.  Disable a node.&lt;/pre<br>6.  Add a new node in the cluster.&lt;/pre<br>7.  Delete a node from the cluster.&lt;/pre<br>8.  Go to Prometheus web UI.&lt;/pre<br>9.  Select <code>longhorn_node_usage_bytes</code> and execute.</td>
+          <td>1.  All the nodes should be identified by Prometheus&lt;/pre<br>2.  All the nodes should show the occupied space on all disks attached to the node.</td>
+      </tr>
+  </tbody>
 </table>
 <p>Note: More details can be found on <a href="https://longhorn.io/docs/1.2.2/monitoring/">https://longhorn.io/docs/1.2.2/monitoring/</a></p>
 

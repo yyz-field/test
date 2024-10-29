@@ -804,34 +804,34 @@
 <p>Make sure the settings are updated if it’s the fresh installation of Longhorn.</p>
 <h2 id="tests">Tests</h2>
 <table>
-<thead>
-<tr>
-<th><strong>S.No</strong></th>
-<th><strong>Scenario</strong></th>
-<th><strong>Steps</strong></th>
-<th><strong>Expected Result</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>Deploy Longhorn using Yaml</td>
-<td>1.  Create a k8s/k3s cluster with 3 workers nodes.<br>2.  Deploy Longhorn using the Yaml file available <a href="https://github.com/longhorn/longhorn/blob/master/deploy/longhorn.yaml">https://github.com/longhorn/longhorn/blob/master/deploy/longhorn.yaml</a>  <br>    <code>kubectl apply -f [https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml](https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml)</code><br>3.  Verify the app gets deployed successfully.  <br>    <code>kubectl get pods n longhorn system</code></td>
-<td>*  The below daemonset should be deployed successfully. <pre>engine-image-ei- , longhorn-csi-plugin, longhorn-manager</pre>*   The below deployment should be deployed successfully.  <pre>    csi-attacher, csi-provisioner, csi-resizer, csi-snapshotter, longhorn-driver-deployer, longhorn-ui</pre>*   The Instance-manager-e, Instance-manager-r pods should be deployed on the each worker node.<br>*   The below services should be deployed  <pre>    csi-attacher, csi-provisioner, csi-resizer, csi-snapshotter, longhorn-backend, longhorn-frontend</pre>*   The below crds should be deployed.  <br>    <a href="http://backingimagedatasources.longhorn.io">backingimagedatasources.longhorn.io</a>  <br>    <a href="http://backingimagemanagers.longhorn.io">backingimagemanagers.longhorn.io</a>  <br>    <a href="http://backingimages.longhorn.io">backingimages.longhorn.io</a>  <br>    <a href="http://backups.longhorn.io">backups.longhorn.io</a>  <br>    <a href="http://backuptargets.longhorn.io">backuptargets.longhorn.io</a>  <br>    <a href="http://backupvolumes.longhorn.io">backupvolumes.longhorn.io</a>  <br>    <a href="http://engineimages.longhorn.io">engineimages.longhorn.io</a>  <br>    <a href="http://engines.longhorn.io">engines.longhorn.io</a>  <br>    <a href="http://instancemanagers.longhorn.io">instancemanagers.longhorn.io</a>  <br>    <a href="http://nodes.longhorn.io">nodes.longhorn.io</a>  <br>    <a href="http://recurringjobs.longhorn.io">recurringjobs.longhorn.io</a>  <br>    <a href="http://replicas.longhorn.io">replicas.longhorn.io</a>  <br>    <a href="http://settings.longhorn.io">settings.longhorn.io</a>  <br>    <a href="http://sharemanagers.longhorn.io">sharemanagers.longhorn.io</a>  <br>    <a href="http://volumes.longhorn.io">volumes.longhorn.io</a></td>
-</tr>
-<tr>
-<td>2</td>
-<td>Deploy Longhorn using Helm chart</td>
-<td>1.  Create a k8s/k3s cluster with 3 workers nodes.<br>2.  As per the instructions <a href="https://github.com/longhorn/longhorn/tree/master/chart">https://github.com/longhorn/longhorn/tree/master/chart</a> deploy the Longhorn app.</td>
-<td>*  The below daemonset should be deployed successfully. <pre>engine-image-ei- , longhorn-csi-plugin, longhorn-manager</pre>*   The below deployment should be deployed successfully.  <pre>    csi-attacher, csi-provisioner, csi-resizer, csi-snapshotter, longhorn-driver-deployer, longhorn-ui</pre>*   The Instance-manager-e, Instance-manager-r pods should be deployed on the each worker node.<br>*   The below services should be deployed  <pre>    csi-attacher, csi-provisioner, csi-resizer, csi-snapshotter, longhorn-backend, longhorn-frontend</pre>*   The below crds should be deployed.  <br>    <a href="http://backingimagedatasources.longhorn.io">backingimagedatasources.longhorn.io</a>  <br>    <a href="http://backingimagemanagers.longhorn.io">backingimagemanagers.longhorn.io</a>  <br>    <a href="http://backingimages.longhorn.io">backingimages.longhorn.io</a>  <br>    <a href="http://backups.longhorn.io">backups.longhorn.io</a>  <br>    <a href="http://backuptargets.longhorn.io">backuptargets.longhorn.io</a>  <br>    <a href="http://backupvolumes.longhorn.io">backupvolumes.longhorn.io</a>  <br>    <a href="http://engineimages.longhorn.io">engineimages.longhorn.io</a>  <br>    <a href="http://engines.longhorn.io">engines.longhorn.io</a>  <br>    <a href="http://instancemanagers.longhorn.io">instancemanagers.longhorn.io</a>  <br>    <a href="http://nodes.longhorn.io">nodes.longhorn.io</a>  <br>    <a href="http://recurringjobs.longhorn.io">recurringjobs.longhorn.io</a>  <br>    <a href="http://replicas.longhorn.io">replicas.longhorn.io</a>  <br>    <a href="http://settings.longhorn.io">settings.longhorn.io</a>  <br>    <a href="http://sharemanagers.longhorn.io">sharemanagers.longhorn.io</a>  <br>    <a href="http://volumes.longhorn.io">volumes.longhorn.io</a></td>
-</tr>
-<tr>
-<td>3</td>
-<td>Deploy Longhorn in Rancher</td>
-<td>1.  Create a k8s/k3s cluster with 3 workers nodes on Rancher cluster.<br>2.  Go to Apps and marketplace and deploy Longhorn with default values</td>
-<td>*   The Longhorn and Longhorn CRDs should be installed as two packages.<br>*   The Longhorn app should start display on the cluster explorer.<br>*   The Link to access the Longhorn UI should work properly.<br>*   Verify all the components are available by clicking on the installed apps.</td>
-</tr>
-</tbody>
+  <thead>
+      <tr>
+          <th><strong>S.No</strong></th>
+          <th><strong>Scenario</strong></th>
+          <th><strong>Steps</strong></th>
+          <th><strong>Expected Result</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>1</td>
+          <td>Deploy Longhorn using Yaml</td>
+          <td>1.  Create a k8s/k3s cluster with 3 workers nodes.<br>2.  Deploy Longhorn using the Yaml file available <a href="https://github.com/longhorn/longhorn/blob/master/deploy/longhorn.yaml">https://github.com/longhorn/longhorn/blob/master/deploy/longhorn.yaml</a>  <br>    <code>kubectl apply -f [https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml](https://raw.githubusercontent.com/longhorn/longhorn/master/deploy/longhorn.yaml)</code><br>3.  Verify the app gets deployed successfully.  <br>    <code>kubectl get pods n longhorn system</code></td>
+          <td>*  The below daemonset should be deployed successfully. <pre>engine-image-ei- , longhorn-csi-plugin, longhorn-manager</pre>*   The below deployment should be deployed successfully.  <pre>    csi-attacher, csi-provisioner, csi-resizer, csi-snapshotter, longhorn-driver-deployer, longhorn-ui</pre>*   The Instance-manager-e, Instance-manager-r pods should be deployed on the each worker node.<br>*   The below services should be deployed  <pre>    csi-attacher, csi-provisioner, csi-resizer, csi-snapshotter, longhorn-backend, longhorn-frontend</pre>*   The below crds should be deployed.  <br>    <a href="http://backingimagedatasources.longhorn.io">backingimagedatasources.longhorn.io</a>  <br>    <a href="http://backingimagemanagers.longhorn.io">backingimagemanagers.longhorn.io</a>  <br>    <a href="http://backingimages.longhorn.io">backingimages.longhorn.io</a>  <br>    <a href="http://backups.longhorn.io">backups.longhorn.io</a>  <br>    <a href="http://backuptargets.longhorn.io">backuptargets.longhorn.io</a>  <br>    <a href="http://backupvolumes.longhorn.io">backupvolumes.longhorn.io</a>  <br>    <a href="http://engineimages.longhorn.io">engineimages.longhorn.io</a>  <br>    <a href="http://engines.longhorn.io">engines.longhorn.io</a>  <br>    <a href="http://instancemanagers.longhorn.io">instancemanagers.longhorn.io</a>  <br>    <a href="http://nodes.longhorn.io">nodes.longhorn.io</a>  <br>    <a href="http://recurringjobs.longhorn.io">recurringjobs.longhorn.io</a>  <br>    <a href="http://replicas.longhorn.io">replicas.longhorn.io</a>  <br>    <a href="http://settings.longhorn.io">settings.longhorn.io</a>  <br>    <a href="http://sharemanagers.longhorn.io">sharemanagers.longhorn.io</a>  <br>    <a href="http://volumes.longhorn.io">volumes.longhorn.io</a></td>
+      </tr>
+      <tr>
+          <td>2</td>
+          <td>Deploy Longhorn using Helm chart</td>
+          <td>1.  Create a k8s/k3s cluster with 3 workers nodes.<br>2.  As per the instructions <a href="https://github.com/longhorn/longhorn/tree/master/chart">https://github.com/longhorn/longhorn/tree/master/chart</a> deploy the Longhorn app.</td>
+          <td>*  The below daemonset should be deployed successfully. <pre>engine-image-ei- , longhorn-csi-plugin, longhorn-manager</pre>*   The below deployment should be deployed successfully.  <pre>    csi-attacher, csi-provisioner, csi-resizer, csi-snapshotter, longhorn-driver-deployer, longhorn-ui</pre>*   The Instance-manager-e, Instance-manager-r pods should be deployed on the each worker node.<br>*   The below services should be deployed  <pre>    csi-attacher, csi-provisioner, csi-resizer, csi-snapshotter, longhorn-backend, longhorn-frontend</pre>*   The below crds should be deployed.  <br>    <a href="http://backingimagedatasources.longhorn.io">backingimagedatasources.longhorn.io</a>  <br>    <a href="http://backingimagemanagers.longhorn.io">backingimagemanagers.longhorn.io</a>  <br>    <a href="http://backingimages.longhorn.io">backingimages.longhorn.io</a>  <br>    <a href="http://backups.longhorn.io">backups.longhorn.io</a>  <br>    <a href="http://backuptargets.longhorn.io">backuptargets.longhorn.io</a>  <br>    <a href="http://backupvolumes.longhorn.io">backupvolumes.longhorn.io</a>  <br>    <a href="http://engineimages.longhorn.io">engineimages.longhorn.io</a>  <br>    <a href="http://engines.longhorn.io">engines.longhorn.io</a>  <br>    <a href="http://instancemanagers.longhorn.io">instancemanagers.longhorn.io</a>  <br>    <a href="http://nodes.longhorn.io">nodes.longhorn.io</a>  <br>    <a href="http://recurringjobs.longhorn.io">recurringjobs.longhorn.io</a>  <br>    <a href="http://replicas.longhorn.io">replicas.longhorn.io</a>  <br>    <a href="http://settings.longhorn.io">settings.longhorn.io</a>  <br>    <a href="http://sharemanagers.longhorn.io">sharemanagers.longhorn.io</a>  <br>    <a href="http://volumes.longhorn.io">volumes.longhorn.io</a></td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>Deploy Longhorn in Rancher</td>
+          <td>1.  Create a k8s/k3s cluster with 3 workers nodes on Rancher cluster.<br>2.  Go to Apps and marketplace and deploy Longhorn with default values</td>
+          <td>*   The Longhorn and Longhorn CRDs should be installed as two packages.<br>*   The Longhorn app should start display on the cluster explorer.<br>*   The Link to access the Longhorn UI should work properly.<br>*   Verify all the components are available by clicking on the installed apps.</td>
+      </tr>
+  </tbody>
 </table>
 
     </article>
