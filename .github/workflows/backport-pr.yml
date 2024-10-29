@@ -46,15 +46,6 @@ jobs:
         if: env.BACKPORT == 'true'
         id: original-issue-title
         run: echo "::set-output title=$(echo '${{ steps.original-issue.outputs.data }}' | jq -r '.title')"
-
-      - name: Find corresponding backport issue
-        if: env.BACKPORT == 'true'
-        id: find-backport-issue
-        run: |
-          # Query to find the corresponding backport issue for the branch
-          BRANCH="${{ steps.extract.outputs.branch }}"
-          BACKPORT_ISSUE=$(gh issue list --search "${BRANCH}" --repo longhorn/longhorn --json number,title -q '.[] | select(.title | test("Backport.*${BRANCH}")) | .number')
-          echo "::set-output name=backport_issue::${BACKPORT_ISSUE}"
           
       - name: Find corresponding backport issue
         if: env.BACKPORT == 'true'
