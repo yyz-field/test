@@ -1,0 +1,66 @@
+name: Link-Backport-PR-Issue
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  check-backport:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Check if PR is a backport
+        run: |
+          if [[ "${{ github.event.pull_request.title }}" =~ "backport #" ]]; then
+            echo "BACKPORT=true" >> $GITHUB_ENV
+          else
+            echo "BACKPORT=false" >> $GITHUB_ENV
+          fi
+
+      - name: Extract backport branch and issue number
+        if: env.BACKPORT == 'true'
+        id: extract
+        run: |
+          # Extract branch from the target branch of the PR
+          BRANCH_NAME=$(echo "${{ github.event.pull_request.base.ref }}")
+          BRANCH_NAME=${BRANCH_NAME%.x}   # Remove the '.x' suffix
+          BRANCH_NAME=$(echo "${BRANCH_NAME}" | sed 's/\./\\./g')   # Escape periods
+          echo "::set-output name=branch::${BRANCH_NAME}"
+
+          # Extract issue number from the PR description
+          ISSUE_NUMBER=$(echo "${{ github.event.pull_request.body }}" | grep -oE 'longhorn/longhorn#[0-9]+' | sed 's/longhorn\/longhorn#//g')
+          echo "::set-output name=issue_number::${ISSUE_NUMBER}"
+
+      - name: Get the original issue
+        if: env.BACKPORT == 'true'
+        id: original-issue
+        uses: octokit/request-action@v2.x
+        with:
+          route: GET /repos/longhorn/longhorn/issues/${{ steps.extract.outputs.issue_number }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Get the original issue title
+        if: env.BACKPORT == 'true'
+        id: original-issue-title
+        run: echo "::set-output title=$(echo '${{ steps.original-issue.outputs.data }}' | jq -r '.title')"
+
+      - name: Find corresponding backport issue
+        if: env.BACKPORT == 'true'
+        id: find-backport-issue
+        uses: octokit/request-action@v2.x
+        with:
+          route: GET /search/issues
+          q: 'repo:longhorn/longhorn is:issue is:open in:title ${{ steps.extract.outputs.branch }} ${{ steps.original-issue-title.outputs.title }}'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Link the PR with the corresponding backport issue
+        if: env.BACKPORT == 'true' and ${{ fromJson(steps.search-issue.outputs.data).total_count > 0 }}
+        run: |
+          # Relate the pull request to the backport issue
+          gh issue comment ${{ fromJson(steps.find-backport-issue.outputs.data).items[0].number }} --body "Related PR: ${{ github.event.pull_request.html_url }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
