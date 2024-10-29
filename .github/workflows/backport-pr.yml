@@ -29,16 +29,16 @@ jobs:
           BRANCH_NAME=$(echo "${BRANCH_NAME}" | sed 's/\./\\./g')   # Escape periods
           echo "::set-output name=branch::${BRANCH_NAME}"
 
-          # Extract issue number from the PR title
-          ISSUE_NUMBER=$(echo "${{ github.event.pull_request.title }}" | grep -oP '(?<=#)\d+')
-          echo "::set-output name=issue::${ISSUE_NUMBER}"
+          # Extract issue number from the PR description
+          ISSUE_NUMBER=$(echo "${{ github.event.pull_request.body }}" | grep -oE 'longhorn/longhorn#[0-9]+' | sed 's/longhorn\/longhorn#//g')
+          echo "::set-output name=issue_number::${ISSUE_NUMBER}"
 
       - name: Get the original issue
         if: env.BACKPORT == 'true'
         id: original-issue
         uses: octokit/request-action@v2.x
         with:
-          route: GET /repos/longhorn/longhorn/issues/${{ steps.extract.outputs.issue }}
+          route: GET /repos/longhorn/longhorn/issues/${{ steps.extract.outputs.issue_number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
