@@ -45,7 +45,7 @@ jobs:
       - name: Get the original issue title
         if: env.BACKPORT == 'true'
         id: original-issue-title
-        run: echo "::set-output title=$(echo '${{ steps.original-issue.outputs.data }}' | jq -r '.title')"
+        run: echo "::set-output title=$(echo '${{ fromJson(steps.original-issue.outputs.data) }}' | jq -r '.title')"
           
       - name: Find corresponding backport issue
         if: env.BACKPORT == 'true'
