@@ -58,7 +58,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Link the PR with the corresponding backport issue
-        if: env.BACKPORT == 'true' and ${{ fromJson(steps.search-issue.outputs.data).total_count > 0 }}
+        if: env.BACKPORT == 'true' && fromJson(steps.search-issue.outputs.data).total_count > 0
         run: |
           # Relate the pull request to the backport issue
           gh issue comment ${{ fromJson(steps.find-backport-issue.outputs.data).items[0].number }} --body "Related PR: ${{ github.event.pull_request.html_url }}"
