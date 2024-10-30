@@ -55,7 +55,7 @@ jobs:
         if: env.BACKPORT == 'true'
         id: backport-issue
         run: |
-          response=$(curl -s "https://api.github.com/search/issues?q=repo:longhorn/longhorn+is:open+is:issue+in:title+${{ steps.extract.outputs.branch }}+${{ fromJson(steps.original-issue.outputs.data).title }}")
+          response=$(curl -s "https://api.github.com/search/issues?q=repo:longhorn/longhorn+is:open+is:issue+in:title+${{ steps.extract.outputs.branch }}+${{ encodeURIComponent(fromJson(steps.original-issue.outputs.data).title) }}")
           echo "BACKPORT_ISSUE=$response" >> $GITHUB_ENV
 
       - name: Link the PR with the corresponding backport issue
