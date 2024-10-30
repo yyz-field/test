@@ -40,7 +40,7 @@ jobs:
         id: original-issue
         uses: octokit/request-action@v2.x
         with:
-          route: GET /repos/longhorn/longhorn/issues/${{ env.ORIGNAL_ISSUE_NUMBER }}
+          route: GET /repos/yyz-field/test/issues/${{ env.ORIGNAL_ISSUE_NUMBER }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -52,13 +52,13 @@ jobs:
         if: env.BACKPORT == 'true'
         id: backport-issue
         run: |
-          response=$(curl -s "https://api.github.com/search/issues?q=repo:longhorn/longhorn+is:open+is:issue+in:title+${{ env.BRANCH }}+${{ env.ORIGINAL_ISSUE_TITLE }}")
+          response=$(curl -s "https://api.github.com/search/issues?q=repo:yyz-field/test+is:open+is:issue+in:title+${{ env.BRANCH }}+${{ env.ORIGINAL_ISSUE_TITLE }}")
           echo "BACKPORT_ISSUE=$response" >> $GITHUB_ENV
 
       - name: Link the PR with the corresponding backport issue
         if: env.BACKPORT == 'true' && fromJson(env.BACKPORT_ISSUE).total_count > 0
         run: |
           # Relate the pull request to the backport issue
-          gh issue comment --repo longhorn/longhorn ${{ fromJson(env.BACKPORT_ISSUE).items[0].number }} --body "Related PR: ${{ github.event.pull_request.html_url }}"
+          gh issue comment --repo yyz-field/test ${{ fromJson(env.BACKPORT_ISSUE).items[0].number }} --body "Related PR: ${{ github.event.pull_request.html_url }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
