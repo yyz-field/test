@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - "v*.*.*"
 jobs:
   diff:
     runs-on: ubuntu-latest
@@ -31,14 +32,14 @@ jobs:
       # Run the step only with "changed" equals "True"
       - name: Create Pull Request
         if: steps.diff-commits.outputs.changed
-        uses: yangchiu/bot/copy-files-and-create-pr-action@master
+        uses: yangchiu/bot/copy-files-and-create-pr-action@copy-crds
         env:
           API_TOKEN_GITHUB: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
         with:
           source: k8s/crds.yaml
           destination_repo: 'yyz-field/copy'
           destination: chart/templates/crds.yaml
-          destination_base_branch: master
+          destination_base_branch: ${{ github.ref_name }}
           destination_head_branch: sync-crds-${{ steps.diff-commits.outputs.hash }}
           pull_request_reviewers: 'yyz-field/qa'
           pr_title: ${{ steps.diff-commits.outputs.message }}

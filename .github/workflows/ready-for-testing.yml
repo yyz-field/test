@@ -1,0 +1,68 @@
+name: Monitor Project Column Changes to Review
+
+on:
+  issues:
+    types: [opened, edited, transferred]
+
+jobs:
+  check-review-column:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if issue is in the "Review" column
+        id: check-review
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COMMENT_TEXT: "This issue has been moved to the Review column."
+        run: |
+          # Set up query variables
+          OWNER=${{ github.repository_owner }}
+          REPO=${{ github.event.repository.name }}
+          ISSUE_NUMBER=${{ github.event.issue.number }}
+
+          # GraphQL query to fetch project items and their statuses
+          QUERY=$(cat <<EOF
+          {
+            repository(owner: "$OWNER", name: "$REPO") {
+              issue(number: $ISSUE_NUMBER) {
+                projectItems(first: 10) {
+                  nodes {
+                    fieldValues(first: 10) {
+                      nodes {
+                        projectField {
+                          name
+                        }
+                        value
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          EOF
+          )
+
+          # Execute the GraphQL query
+          RESPONSE=$(curl -s -X POST -H "Authorization: bearer $GITHUB_TOKEN" -H "Content-Type: application/json" \
+            -d "{\"query\": \"$QUERY\"}" https://api.github.com/graphql)
+
+          # Check if the issue is in the "Review" column
+          IS_IN_REVIEW=$(echo $RESPONSE | jq -r '.data.repository.issue.projectItems.nodes[].fieldValues.nodes[] | select(.projectField.name == "Status") | select(.value == "Review") | length > 0')
+
+          echo "Is in Review: $IS_IN_REVIEW"
+
+          # Check if a specific comment already exists
+          COMMENT_EXISTS=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+            https://api.github.com/repos/$OWNER/$REPO/issues/$ISSUE_NUMBER/comments | \
+            jq -r --arg COMMENT_TEXT "$COMMENT_TEXT" '.[] | select(.body == $COMMENT_TEXT) | length > 0')
+
+          echo "Comment exists: $COMMENT_EXISTS"
+
+          # Add the comment if the issue is in "Review" and the comment doesn't exist
+          if [[ "$IS_IN_REVIEW" == "true" && "$COMMENT_EXISTS" == "false" ]]; then
+            curl -s -X POST -H "Authorization: token $GITHUB_TOKEN" \
+              -d "{\"body\":\"$COMMENT_TEXT\"}" \
+              https://api.github.com/repos/$OWNER/$REPO/issues/$ISSUE_NUMBER/comments
+            echo "Comment added to issue #$ISSUE_NUMBER"
+          fi
