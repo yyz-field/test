@@ -40,7 +40,7 @@ jobs:
         id: original-issue
         uses: octokit/request-action@v2.x
         with:
-          route: GET /repos/yyz-field/test/issues/${{ env.ORIGNAL_ISSUE_NUMBER }}
+          route: GET /repos/yyz-field/test/issues/${{ env.ORIGINAL_ISSUE_NUMBER }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
