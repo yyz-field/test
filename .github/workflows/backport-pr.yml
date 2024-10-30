@@ -44,7 +44,7 @@ jobs:
 
       - name: URL encode the original issue title
         id: url-encode
-        run: echo "ORIGINAL_ISSUE_TITLE=$(node -e 'console.log(encodeURIComponent(${{ fromJson(steps.original-issue.outputs.data).title  }}))')" >> $GITHUB_ENV
+        run: echo "ORIGINAL_ISSUE_TITLE=$(node -e 'console.log(encodeURIComponent("${{ fromJson(steps.original-issue.outputs.data).title  }}"))')" >> $GITHUB_ENV
           
      # - name: Find corresponding backport issue
      #   if: env.BACKPORT == 'true'
