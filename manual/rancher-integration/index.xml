@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rancher integration test cases on Longhorn Manual Test Cases</title>
+    <link>https://longhorn.github.io/longhorn-tests/manual/rancher-integration/</link>
+    <description>Recent content in Rancher integration test cases on Longhorn Manual Test Cases</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://longhorn.github.io/longhorn-tests/manual/rancher-integration/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Access Longhorn GUI using Rancher proxy</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/rancher-integration/access-lh-gui-using-rancher-ui/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/rancher-integration/access-lh-gui-using-rancher-ui/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Given&lt;/strong&gt; Downstream (RKE2/RKE1/K3s) cluster in Rancher&lt;/p&gt;&#xA;&lt;p&gt;AND Deploy Longhorn using either of Kubectl/helm/marketplace app&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;When&lt;/strong&gt; Click the &lt;code&gt;Longhorn&lt;/code&gt; app on Rancher UI&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Then&lt;/strong&gt; Navigates to Longhorn UI&lt;/p&gt;&#xA;&lt;p&gt;AND User should be to do all the operations available on the Longhorn GUI&lt;/p&gt;&#xA;&lt;p&gt;AND URL should be a suffix to the Rancher URL&lt;/p&gt;&#xA;&lt;p&gt;AND NO error in the console logs&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Drain using Rancher UI</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/rancher-integration/drain-using-rancher-ui/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/rancher-integration/drain-using-rancher-ui/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; Enabling &lt;code&gt;Delete Empty Dir Data&lt;/code&gt; is mandatory to drain a node if a pod is associated with any storage.&lt;/p&gt;&#xA;&lt;h2 id=&#34;test-with-longhorn-default-setting-of-node-drain-policy-block-if-contains-last-replica&#34;&gt;Test with Longhorn default setting of &amp;lsquo;Node Drain Policy&amp;rsquo;: &lt;code&gt;block-if-contains-last-replica&lt;/code&gt;&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-drain-operation-on-single-node-using-rancher-ui&#34;&gt;1. Drain operation on single node using Rancher UI&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Given&lt;/strong&gt;  Single node (1 Worker) cluster with Longhorn installed&lt;/p&gt;&#xA;&lt;p&gt;AND few RWO and RWX volumes attached with node/pod exists&lt;/p&gt;&#xA;&lt;p&gt;AND 1 RWO and 1 RWX volumes unattached&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;When&lt;/strong&gt; Drain the node with default values of Rancher UI&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Longhorn in an hardened cluster</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/rancher-integration/lh-hardend-rancher/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/rancher-integration/lh-hardend-rancher/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Given&lt;/strong&gt; Hardened Downstream (RKE2/RKE1/K3s) cluster in Rancher v2.6.x with CIS 1.6 as per &lt;a href=&#34;https://ranchermanager.docs.rancher.com/v2.6/pages-for-subheaders/rancher-v2.6-hardening-guides&#34;&gt;Hardening guide&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;When&lt;/strong&gt; Deploy Longhorn using Marketplace app&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Then&lt;/strong&gt; Longhorn should be deployed properly&lt;/p&gt;&#xA;&lt;p&gt;AND Volume creation and other operations should work fine&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Given&lt;/strong&gt; Hardened Downstream (RKE2/RKE1/K3s) cluster in Rancher v2.7.x with CIS 1.6 or 1.20 or 1.23 as per &lt;a href=&#34;https://ranchermanager.docs.rancher.com/pages-for-subheaders/rancher-v2.7-hardening-guides&#34;&gt;Hardending guide for Rancher 2.7&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;When&lt;/strong&gt; Deploy Longhorn using Marketplace app&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Then&lt;/strong&gt; Longhorn should be deployed properly&lt;/p&gt;&#xA;&lt;p&gt;AND Volume creation and other operations should work fine&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Longhorn using fleet on multiple downstream clusters</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/rancher-integration/fleet-deploy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/rancher-integration/fleet-deploy/</guid>
+      <description>&lt;p&gt;reference: &lt;a href=&#34;https://github.com/rancher/fleet&#34;&gt;https://github.com/rancher/fleet&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;test-longhorn-deployment-using-fleet&#34;&gt;Test Longhorn deployment using fleet:&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Given&lt;/strong&gt; Downstream multiple (RKE2/RKE1/K3s) clusters in Rancher&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;When&lt;/strong&gt; Use fleet to deploy Longhorn&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Then&lt;/strong&gt; Longhorn should be deployed to all the cluster&lt;/p&gt;&#xA;&lt;p&gt;AND Longhorn UI should be accessible using Rancher proxy&lt;/p&gt;&#xA;&lt;h3 id=&#34;test-longhorn-uninstall-using-fleet&#34;&gt;Test Longhorn uninstall using fleet:&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Given&lt;/strong&gt; Downstream multiple (RKE2/RKE1/K3s) clusters in Rancher&lt;/p&gt;&#xA;&lt;p&gt;AND Longhorn is deployed on all the clusters using fleet&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;When&lt;/strong&gt; Use fleet to uninstall Longhorn&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Then&lt;/strong&gt; Longhorn should be uninstalled from all the cluster&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Upgrade Kubernetes using Rancher UI</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/rancher-integration/upgrade-using-rancher-ui/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/rancher-integration/upgrade-using-rancher-ui/</guid>
+      <description>&lt;p&gt;Note: Longhorn version v1.3.x doesn&amp;rsquo;t support Kubernetes v1.25 and onwards&lt;/p&gt;&#xA;&lt;h2 id=&#34;test-with-longhorn-default-setting-of-node-drain-policy-block-if-contains-last-replica&#34;&gt;Test with Longhorn default setting of &amp;lsquo;Node Drain Policy&amp;rsquo;: &lt;code&gt;block-if-contains-last-replica&lt;/code&gt;&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-upgrade-single-node-cluster-using-rancher-ui---rke2-cluster&#34;&gt;1. Upgrade single node cluster using Rancher UI - RKE2 cluster&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Given&lt;/strong&gt;  Single node RKE2 cluster provisioned in Rancher with K8s prior version with Longhorn installed&lt;/p&gt;&#xA;&lt;p&gt;AND few RWO and RWX volumes attached with node/pod exists&lt;/p&gt;&#xA;&lt;p&gt;AND 1 RWO and 1 RWX volumes unattached&lt;/p&gt;&#xA;&lt;p&gt;AND 1 RWO volume with 50 Gi data&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Upgrade Kubernetes using SUC</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/rancher-integration/upgrade-using-suc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/rancher-integration/upgrade-using-suc/</guid>
+      <description>&lt;p&gt;Note: Longhorn version v1.3.x doesn&amp;rsquo;t support Kubernetes v1.25 and onwards&lt;/p&gt;&#xA;&lt;h2 id=&#34;test-with-longhorn-default-setting-of-node-drain-policy-block-if-contains-last-replica&#34;&gt;Test with Longhorn default setting of &amp;lsquo;Node Drain Policy&amp;rsquo;: &lt;code&gt;block-if-contains-last-replica&lt;/code&gt;&lt;/h2&gt;&#xA;&lt;h3 id=&#34;1-upgrade-multi-node-cluster-using-suc---k3s-cluster&#34;&gt;1. Upgrade multi node cluster using SUC - K3s cluster&lt;/h3&gt;&#xA;&lt;p&gt;&lt;strong&gt;Given&lt;/strong&gt;  Multi node (1 master and 3 worker) K3s cluster (not provisioned by Rancher) with K3s prior version with Longhorn installed&lt;/p&gt;&#xA;&lt;p&gt;AND &lt;a href=&#34;https://github.com/rancher/system-upgrade-controller#deploying&#34;&gt;System Upgrade Controller&lt;/a&gt; deployed&lt;/p&gt;&#xA;&lt;p&gt;AND few RWO and RWX volumes attached with node/pod exists&lt;/p&gt;&#xA;&lt;p&gt;AND 1 RWO and 1 RWX volumes unattached&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

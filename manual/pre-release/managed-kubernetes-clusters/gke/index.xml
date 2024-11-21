@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GKE on Longhorn Manual Test Cases</title>
+    <link>https://longhorn.github.io/longhorn-tests/manual/pre-release/managed-kubernetes-clusters/gke/</link>
+    <description>Recent content in GKE on Longhorn Manual Test Cases</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://longhorn.github.io/longhorn-tests/manual/pre-release/managed-kubernetes-clusters/gke/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[Expand Volume](https://longhorn.io/docs/1.3.0/advanced-resources/support-managed-k8s-service/manage-node-group-on-gke/)</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/pre-release/managed-kubernetes-clusters/gke/expand-volume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/pre-release/managed-kubernetes-clusters/gke/expand-volume/</guid>
+      <description>&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Create GKE cluster with 3 nodes and install Longhorn.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Create &lt;a href=&#34;https://github.com/longhorn/longhorn/blob/master/examples/deployment.yaml&#34;&gt;deployment&lt;/a&gt; and write some data to it.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;In Longhorn, set &lt;code&gt;replica-replenishment-wait-interval&lt;/code&gt; to &lt;code&gt;0&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Add a new node-pool. Later Longhorn components will be automatically deployed on the nodes in this pool.&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;GKE_NODEPOOL_NAME_NEW=&amp;lt;new-nodepool-name&amp;gt;&#xA;GKE_REGION=&amp;lt;gke-region&amp;gt;&#xA;GKE_CLUSTER_NAME=&amp;lt;gke-cluster-name&amp;gt;&#xA;GKE_IMAGE_TYPE=Ubuntu&#xA;GKE_MACHINE_TYPE=&amp;lt;gcp-machine-type&amp;gt;&#xA;GKE_DISK_SIZE_NEW=&amp;lt;new-disk-size-in-gb&amp;gt;&#xA;GKE_NODE_NUM=&amp;lt;number-of-nodes&amp;gt;&#xA;gcloud container node-pools create ${GKE_NODEPOOL_NAME_NEW} \&#xA;  --region ${GKE_REGION} \&#xA;  --cluster ${GKE_CLUSTER_NAME} \&#xA;  --image-type ${GKE_IMAGE_TYPE} \&#xA;  --machine-type ${GKE_MACHINE_TYPE} \&#xA;  --disk-size ${GKE_DISK_SIZE_NEW} \&#xA;  --num-nodes ${GKE_NODE_NUM}&#xA;&#xA;gcloud container node-pools list \&#xA;  --zone ${GKE_REGION} \&#xA;  --cluster ${GKE_CLUSTER_NAME} &#xA;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Using Longhorn UI to disable the disk scheduling and request eviction for nodes in the old node-pool.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>[Upgrade K8s](https://longhorn.io/docs/1.3.0/advanced-resources/support-managed-k8s-service/upgrade-k8s-on-gke/)</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/pre-release/managed-kubernetes-clusters/gke/upgrade-k8s/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/pre-release/managed-kubernetes-clusters/gke/upgrade-k8s/</guid>
+      <description>&lt;ol&gt;&#xA;&lt;li&gt;Create GKE cluster with 3 nodes and install Longhorn.&lt;/li&gt;&#xA;&lt;li&gt;Create &lt;a href=&#34;https://github.com/longhorn/longhorn/blob/master/examples/deployment.yaml&#34;&gt;deployment&lt;/a&gt; and write some data to it.&lt;/li&gt;&#xA;&lt;li&gt;In Longhorn, set &lt;code&gt;replica-replenishment-wait-interval&lt;/code&gt; to &lt;code&gt;0&lt;/code&gt;.&lt;/li&gt;&#xA;&lt;li&gt;See &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/how-to/upgrading-a-cluster#upgrading_the_cluster&#34;&gt;Upgrading the cluster&lt;/a&gt; and &lt;a href=&#34;https://cloud.google.com/kubernetes-engine/docs/how-to/upgrading-a-cluster#upgrading-nodes&#34;&gt;Upgrading node pools&lt;/a&gt; for instructions.&lt;/li&gt;&#xA;&lt;li&gt;Check the deployment in step 2 still running and data exist.&lt;/li&gt;&#xA;&lt;/ol&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Operating System specific tests for SUSE SLES12SP3 on Longhorn Manual Test Cases</title>
+    <link>https://longhorn.github.io/longhorn-tests/manual/release-specific/v1.0.0/suse-sles12sp3/</link>
+    <description>Recent content in Operating System specific tests for SUSE SLES12SP3 on Longhorn Manual Test Cases</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://longhorn.github.io/longhorn-tests/manual/release-specific/v1.0.0/suse-sles12sp3/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Testing ext4 with custom fs params1 (no 64bit, no metadata_csum)</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/release-specific/v1.0.0/suse-sles12sp3/ext4-custom-fs-params-1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/release-specific/v1.0.0/suse-sles12sp3/ext4-custom-fs-params-1/</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;set the following filesystem parameters: &lt;code&gt;-O ^64bit,^metadata_csum&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;create a volume + pv + pvc with filesystem &lt;code&gt;ext4&lt;/code&gt; named &lt;code&gt;ext4-no-ck-no-64&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;create a deployment that uses &lt;code&gt;ext4-no-ck-no-64&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;verify that the pod enters running state and the volume is accessible&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Testing ext4 with custom fs params2 (no metadata_csum)</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/release-specific/v1.0.0/suse-sles12sp3/ext4-custom-fs-params-2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/release-specific/v1.0.0/suse-sles12sp3/ext4-custom-fs-params-2/</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;set the following filesystem parameters: &lt;code&gt;-O ^metadata_csum&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;create a volume + pv + pvc with filesystem &lt;code&gt;ext4&lt;/code&gt; named &lt;code&gt;ext4-no-ck&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;create a deployment that uses &lt;code&gt;ext4-no-ck&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;verify that the pod enters running state and the volume is accessible&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Testing ext4 without custom fs params</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/release-specific/v1.0.0/suse-sles12sp3/ext4-no-custom-fs-params/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/release-specific/v1.0.0/suse-sles12sp3/ext4-no-custom-fs-params/</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;create a volume + pv + pvc with filesystem &lt;code&gt;ext4&lt;/code&gt; named &lt;code&gt;ext-ck-fail&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;create a deployment that uses &lt;code&gt;ext-ck-fail&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;verify &lt;code&gt;MountVolume.SetUp failed for volume &amp;quot;ext4-ck-fails&amp;quot;&lt;/code&gt; is part of the pod events&lt;/li&gt;&#xA;&lt;li&gt;verify that the pod does not enter running state&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>Testing xfs after custom fs params (xfs should ignore the custom fs params)</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/release-specific/v1.0.0/suse-sles12sp3/xfs-after-custom-fs-params/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/release-specific/v1.0.0/suse-sles12sp3/xfs-after-custom-fs-params/</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;create a volume + pv + pvc with filesystem &lt;code&gt;xfs&lt;/code&gt; named &lt;code&gt;xfs-ignores&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;create a deployment that uses &lt;code&gt;xfs-ignores&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;verify that the pod enters running state and the volume is accessible&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>
