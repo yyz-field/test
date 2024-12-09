@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>v1.4.1 on Longhorn Manual Test Cases</title>
+    <link>https://longhorn.github.io/longhorn-tests/manual/release-specific/v1.4.1/</link>
+    <description>Recent content in v1.4.1 on Longhorn Manual Test Cases</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://longhorn.github.io/longhorn-tests/manual/release-specific/v1.4.1/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Test the trim related option update for old volumes</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/release-specific/v1.4.1/test-the-trim-related-option-update-for-old-volumes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/release-specific/v1.4.1/test-the-trim-related-option-update-for-old-volumes/</guid>
+      <description>&lt;h2 id=&#34;related-issue&#34;&gt;Related issue&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://github.com/longhorn/longhorn/issues/5218&#34;&gt;https://github.com/longhorn/longhorn/issues/5218&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;test-step&#34;&gt;Test step&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;Given&lt;/strong&gt; Deploy Longhorn v1.3.2&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;And&lt;/em&gt; Created and attached a volume.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;And&lt;/em&gt; Upgrade Longhorn to the latest.&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;And&lt;/em&gt; Do live upgrade for the volume. (The 1st volume using the latest engine image but running in the old instance manager.)&lt;/p&gt;&#xA;&lt;p&gt;&lt;em&gt;And&lt;/em&gt; Created and attached a volume with the v1.3.2 engine image. (The 2nd volume using the old engine image but running in the new instance manager.)&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;When&lt;/strong&gt; Try to update &lt;code&gt;volume.spec.unmapMarkSnapChainRemoved&lt;/code&gt; for both volumes via &lt;code&gt;kubectl&lt;/code&gt; or GUI&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

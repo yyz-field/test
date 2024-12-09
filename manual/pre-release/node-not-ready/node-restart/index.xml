@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Node Restart on Longhorn Manual Test Cases</title>
+    <link>https://longhorn.github.io/longhorn-tests/manual/pre-release/node-not-ready/node-restart/</link>
+    <description>Recent content in Node Restart on Longhorn Manual Test Cases</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://longhorn.github.io/longhorn-tests/manual/pre-release/node-not-ready/node-restart/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[#1366](https://github.com/longhorn/longhorn/issues/1366) &amp;&amp; [#1328](https://github.com/longhorn/longhorn/issues/1328) The node the DR volume attached to is rebooted</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/pre-release/node-not-ready/node-restart/dr-volume-node-rebooted/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/pre-release/node-not-ready/node-restart/dr-volume-node-rebooted/</guid>
+      <description>&lt;h4 id=&#34;scenario-1&#34;&gt;Scenario 1&lt;/h4&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Create a pod with Longhorn volume.&lt;/li&gt;&#xA;&lt;li&gt;Write data to the volume and get the md5sum.&lt;/li&gt;&#xA;&lt;li&gt;Create the 1st backup for the volume.&lt;/li&gt;&#xA;&lt;li&gt;Create a DR volume from the backup.&lt;/li&gt;&#xA;&lt;li&gt;Wait for the DR volume starting the initial restore. Then reboot the DR volume attached node immediately.&lt;/li&gt;&#xA;&lt;li&gt;Wait for the DR volume detached then reattached.&lt;/li&gt;&#xA;&lt;li&gt;Wait for the DR volume restore complete after the reattachment.&lt;/li&gt;&#xA;&lt;li&gt;Activate the DR volume and check the data md5sum.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;h4 id=&#34;scenario-2&#34;&gt;Scenario 2&lt;/h4&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Create a pod with Longhorn volume.&lt;/li&gt;&#xA;&lt;li&gt;Write data to the volume and get the md5sum.&lt;/li&gt;&#xA;&lt;li&gt;Create the 1st backup for the volume.&lt;/li&gt;&#xA;&lt;li&gt;Create a DR volume from the backup.&lt;/li&gt;&#xA;&lt;li&gt;Wait for the DR volume to complete the initial restore.&lt;/li&gt;&#xA;&lt;li&gt;Write more data to the original volume and get the md5sum.&lt;/li&gt;&#xA;&lt;li&gt;Create the 2nd backup for the volume.&lt;/li&gt;&#xA;&lt;li&gt;Wait for the DR volume incremental restore getting triggered. Then reboot the DR volume attached node immediately.&lt;/li&gt;&#xA;&lt;li&gt;Wait for the DR volume detached then reattached.&lt;/li&gt;&#xA;&lt;li&gt;Wait for the DR volume restore complete after the reattachment.&lt;/li&gt;&#xA;&lt;li&gt;Activate the DR volume and check the data md5sum.&lt;/li&gt;&#xA;&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>Physical node reboot</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/pre-release/node-not-ready/node-restart/physical-node-reboot/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/pre-release/node-not-ready/node-restart/physical-node-reboot/</guid>
+      <description>&lt;ol&gt;&#xA;&lt;li&gt;Reboot the node that the controller (StatefulSet/Deployment) attached to. After reboot complete, the volume should be reattached to the node.&lt;/li&gt;&#xA;&lt;/ol&gt;</description>
+    </item>
+  </channel>
+</rss>

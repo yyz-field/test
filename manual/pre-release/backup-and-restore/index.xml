@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Backup &amp; Restore tests on Longhorn Manual Test Cases</title>
+    <link>https://longhorn.github.io/longhorn-tests/manual/pre-release/backup-and-restore/</link>
+    <description>Recent content in Backup &amp; Restore tests on Longhorn Manual Test Cases</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="https://longhorn.github.io/longhorn-tests/manual/pre-release/backup-and-restore/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>[#1279](https://github.com/longhorn/longhorn/issues/1279) DR volume live upgrade and rebuild</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/pre-release/backup-and-restore/dr-volume-live-upgrade-and-rebuild/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/pre-release/backup-and-restore/dr-volume-live-upgrade-and-rebuild/</guid>
+      <description>&lt;ol&gt;&#xA;&lt;li&gt;Launch Longhorn at the previous version.&lt;/li&gt;&#xA;&lt;li&gt;Launch a pod with Longhorn volume.&lt;/li&gt;&#xA;&lt;li&gt;Write data to the volume and take the 1st backup.&lt;/li&gt;&#xA;&lt;li&gt;Create 2 DR volumes from the 1st backup.&lt;/li&gt;&#xA;&lt;li&gt;Shutdown the pod and wait for the original volume detached.&lt;/li&gt;&#xA;&lt;li&gt;Expand the original volume and wait for the expansion complete.&lt;/li&gt;&#xA;&lt;li&gt;Write data to the original volume and take the 2nd backup. (Make sure the total data size is larger than the original volume size so that there is date written to the expanded part.)&lt;/li&gt;&#xA;&lt;li&gt;Trigger incremental restore for the DR volumes by listing the backup volumes, and wait for restore complete.&lt;/li&gt;&#xA;&lt;li&gt;Upgrade Longhorn to the latest version.&lt;/li&gt;&#xA;&lt;li&gt;Crash one random replica for the 1st DR volume .&lt;/li&gt;&#xA;&lt;li&gt;Verify the 1st DR volume rebuild replicas and state change from &lt;code&gt;Degraded&lt;/code&gt; to &lt;code&gt;Healthy&lt;/code&gt;.&lt;/li&gt;&#xA;&lt;li&gt;Write data to the original volume and take the 3rd backup.&lt;/li&gt;&#xA;&lt;li&gt;Trigger incremental restore for the DR volumes, and wait for restore complete.&lt;/li&gt;&#xA;&lt;li&gt;Do live upgrade for the 1st DR volume. This live upgrade call should success.&lt;/li&gt;&#xA;&lt;li&gt;Activate the 1st DR volume.&lt;/li&gt;&#xA;&lt;li&gt;Launch a pod for the 1st activated volume, and verify the restored data is correct.&lt;/li&gt;&#xA;&lt;li&gt;Do live upgrade for the original volume and the 2nd DR volumes.&lt;/li&gt;&#xA;&lt;li&gt;Crash one random replica for the 2nd DR volume.&lt;/li&gt;&#xA;&lt;li&gt;Wait for the restore &amp;amp; rebuild complete.&lt;/li&gt;&#xA;&lt;li&gt;Delete one replica for the 2nd DR volume, then activate the DR volume before the rebuild complete.&lt;/li&gt;&#xA;&lt;li&gt;Verify the DR volume will be auto detached after the rebuild complete.&lt;/li&gt;&#xA;&lt;li&gt;Launch a pod for the 2nd activated volume, and verify the restored data is correct.&lt;/li&gt;&#xA;&lt;li&gt;Crash one replica for the 2nd activated volume.&lt;/li&gt;&#xA;&lt;li&gt;Wait for the rebuild complete, then verify the volume still works fine by reading/writing more data.&lt;/li&gt;&#xA;&lt;/ol&gt;</description>
+    </item>
+    <item>
+      <title>[#1341](https://github.com/longhorn/longhorn/issues/1341) concurrent backup test</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/pre-release/backup-and-restore/concurrent-backup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/pre-release/backup-and-restore/concurrent-backup/</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;Take a manual backup of the volume &lt;code&gt;bak&lt;/code&gt; while a recurring backup is running&lt;/li&gt;&#xA;&lt;li&gt;verify that backup got created&lt;/li&gt;&#xA;&lt;li&gt;verify that backup sticks around even when recurring backups are cleaned up&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>[#1404](https://github.com/longhorn/longhorn/issues/1404) test backup functionality on google cloud and other s3 interop providers.</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/pre-release/backup-and-restore/google-cloud-s3-interop-backups/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/pre-release/backup-and-restore/google-cloud-s3-interop-backups/</guid>
+      <description>&lt;ul&gt;&#xA;&lt;li&gt;create vol &lt;code&gt;s3-test&lt;/code&gt;and mount to a node on &lt;code&gt;/mnt/s3-test&lt;/code&gt; via pvc&lt;/li&gt;&#xA;&lt;li&gt;write some data on vol &lt;code&gt;s3-test&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;take backup(1)&lt;/li&gt;&#xA;&lt;li&gt;write new data on vol &lt;code&gt;s3-test&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;take backup(2)&lt;/li&gt;&#xA;&lt;li&gt;restore backup(1)&lt;/li&gt;&#xA;&lt;li&gt;verify data is consistent with backup(1)&lt;/li&gt;&#xA;&lt;li&gt;restore backup(2)&lt;/li&gt;&#xA;&lt;li&gt;verify data is consistent with backup(2)&lt;/li&gt;&#xA;&lt;li&gt;delete backup(1)&lt;/li&gt;&#xA;&lt;li&gt;delete backup(2)&lt;/li&gt;&#xA;&lt;li&gt;delete backup volume &lt;code&gt;s3-test&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;verify volume path is removed&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title>[#4637](https://github.com/longhorn/longhorn/issues/4637) pull backup created by another Longhorn system</title>
+      <link>https://longhorn.github.io/longhorn-tests/manual/pre-release/backup-and-restore/pull-backup-created-by-another-longhorn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://longhorn.github.io/longhorn-tests/manual/pre-release/backup-and-restore/pull-backup-created-by-another-longhorn/</guid>
+      <description>&lt;ol&gt;&#xA;&lt;li&gt;Prepare 2 k8s clusters: cluster A and cluster B.&lt;/li&gt;&#xA;&lt;li&gt;Install previous version of Longhorn which doesn&amp;rsquo;t include this fix e.g v1.3.1, v1.2.5 on cluster A.&lt;/li&gt;&#xA;&lt;li&gt;Install the release version of Longhorn on cluster B.&lt;/li&gt;&#xA;&lt;li&gt;Set the same backup target on both cluster A and cluster B.&lt;/li&gt;&#xA;&lt;li&gt;Create volume, write some data, and take backup on cluster A.&lt;/li&gt;&#xA;&lt;li&gt;Wait for backup target polling update on cluster B.&lt;/li&gt;&#xA;&lt;li&gt;Make sure the backup created by cluster A can be pulled on cluster B.&lt;/li&gt;&#xA;&lt;li&gt;Restore the pulled backup and verify the data on cluster B.&lt;/li&gt;&#xA;&lt;li&gt;Repeat the test with both clusters installed the release version of Longhorn.&lt;/li&gt;&#xA;&lt;/ol&gt;</description>
+    </item>
+  </channel>
+</rss>
