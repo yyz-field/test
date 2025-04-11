@@ -114,10 +114,7 @@
   <li><a href="https://longhorn.github.io/longhorn-tests/manual/pre-release/environment/k3s-selinux-compatibility/">Compatibility with k3s and SELinux</a></li>
   
 
-  <li><a href="https://longhorn.github.io/longhorn-tests/manual/pre-release/environment/rke2-cis-1.6-profile/">Test Longhorn deployment on RKE2 v1.24- with CIS-1.6 profile</a></li>
-  
-
-  <li><a href="https://longhorn.github.io/longhorn-tests/manual/pre-release/environment/rke2-cis-1.23-profile/">Test Longhorn deployment on RKE2 v1.25+ with CIS-1.23 profile</a></li>
+  <li><a href="https://longhorn.github.io/longhorn-tests/manual/pre-release/environment/rke2-cis-1/">Test Longhorn deployment on RKE2 v1.25+ with CIS-1.23 profile</a></li>
   
 
 </ul>
@@ -801,8 +798,7 @@
 <p><strong>Note:</strong>
 During the restoration process, if the engine process fails to communicate with a replica, all replicas will be marked as <code>ERR</code>, and the volume&rsquo;s <code>RestoreRequired</code> status cannot be set to <code>false</code>. Longhorn relies on the <code>RestoreRequired</code> value to determine the completion of the restoration and whether the failed replicas can be automatically salvaged.</p>
 <p>In this case, the volume would remain in detached/faulted state.</p>
-<p>Ref: <a href="https://github.com/longhorn/longhorn/issues/5666">https://github.com/longhorn/longhorn/issues/5666</a></p>
-</blockquote>
+<p>Ref: <a href="https://github.com/longhorn/longhorn/issues/5666">https://github.com/longhorn/longhorn/issues/5666</a></p></blockquote>
 </li>
 <li>
 <p>Attach the volume and verify the restored data.</p>

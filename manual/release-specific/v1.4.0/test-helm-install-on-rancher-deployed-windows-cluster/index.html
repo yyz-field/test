@@ -114,10 +114,7 @@
   <li><a href="https://longhorn.github.io/longhorn-tests/manual/pre-release/environment/k3s-selinux-compatibility/">Compatibility with k3s and SELinux</a></li>
   
 
-  <li><a href="https://longhorn.github.io/longhorn-tests/manual/pre-release/environment/rke2-cis-1.6-profile/">Test Longhorn deployment on RKE2 v1.24- with CIS-1.6 profile</a></li>
-  
-
-  <li><a href="https://longhorn.github.io/longhorn-tests/manual/pre-release/environment/rke2-cis-1.23-profile/">Test Longhorn deployment on RKE2 v1.25+ with CIS-1.23 profile</a></li>
+  <li><a href="https://longhorn.github.io/longhorn-tests/manual/pre-release/environment/rke2-cis-1/">Test Longhorn deployment on RKE2 v1.25+ with CIS-1.23 profile</a></li>
   
 
 </ul>
@@ -788,14 +785,12 @@
 <p><em>And</em> Created new <code>Custom</code> Windows cluster with Rancher.</p>
 <blockquote>
 <p>Select <code>Flannel</code> for <code>Network Provider</code> <br>
-Enable <code>Windows Support</code></p>
-</blockquote>
+Enable <code>Windows Support</code></p></blockquote>
 <p><em>And</em> Added the 3 nodes to the Rancher Windows cluster.</p>
 <blockquote>
 <p><a href="https://rancher.com/docs/rancher/v2.6/en/cluster-provisioning/rke-clusters/windows-clusters/#add-linux-master-node">Add Linux Master Node</a><br>
 <a href="https://rancher.com/docs/rancher/v2.6/en/cluster-provisioning/rke-clusters/windows-clusters/#add-linux-master-node">Add Linux Worker Node</a><br>
-<a href="https://rancher.com/docs/rancher/v2.6/en/cluster-provisioning/rke-clusters/windows-clusters/#add-a-windows-worker-node">Add Windows Worker Node</a></p>
-</blockquote>
+<a href="https://rancher.com/docs/rancher/v2.6/en/cluster-provisioning/rke-clusters/windows-clusters/#add-a-windows-worker-node">Add Windows Worker Node</a></p></blockquote>
 <p><strong>When</strong> helm install longhorn with <code>global.cattle.windowsCluster.enabled=true</code>.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>kubectl create namespace longhorn-system <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>helm install longhorn ./chart/ --namespace longhorn-system <span style="color:#ae81ff">\

@@ -114,10 +114,7 @@
   <li><a href="https://longhorn.github.io/longhorn-tests/manual/pre-release/environment/k3s-selinux-compatibility/">Compatibility with k3s and SELinux</a></li>
   
 
-  <li><a href="https://longhorn.github.io/longhorn-tests/manual/pre-release/environment/rke2-cis-1.6-profile/">Test Longhorn deployment on RKE2 v1.24- with CIS-1.6 profile</a></li>
-  
-
-  <li><a href="https://longhorn.github.io/longhorn-tests/manual/pre-release/environment/rke2-cis-1.23-profile/">Test Longhorn deployment on RKE2 v1.25+ with CIS-1.23 profile</a></li>
+  <li><a href="https://longhorn.github.io/longhorn-tests/manual/pre-release/environment/rke2-cis-1/">Test Longhorn deployment on RKE2 v1.25+ with CIS-1.23 profile</a></li>
   
 
 </ul>
@@ -803,7 +800,7 @@ And Both the volumes have 2 replicas.</p>
 <p><strong>When</strong> The Volume &amp; snap meta files are deleted one by one.
 And If replica rebuilding is triggered and the IM associated with another replica is also crashed</p>
 <p><strong>Then</strong> Volume should not stuck in attaching-detaching loop</p>
-<h4 id="4-failed-replica-tries-to-rebuild-from-other-just-crashed-replica---httpsgithubcomlonghornlonghornissues4212">4. Failed replica tries to rebuild from other just crashed replica - <a href="https://github.com/longhorn/longhorn/issues/4212">https://github.com/longhorn/longhorn/issues/4212</a></h4>
+<h4 id="4-failed-replica-tries-to-rebuild-from-other-just-crashed-replica--">4. Failed replica tries to rebuild from other just crashed replica - <a href="https://github.com/longhorn/longhorn/issues/4212">https://github.com/longhorn/longhorn/issues/4212</a></h4>
 <p><strong>Given</strong> 1 RWO and 1 RWX volume is attached to a pod.
 And Both the volumes have 2 replicas.
 And Random data is continuously being written to the volume using command <code>dd if=/dev/urandom of=file1 count=100 bs=1M conv=fsync status=progress oflag=direct,sync</code></p>
