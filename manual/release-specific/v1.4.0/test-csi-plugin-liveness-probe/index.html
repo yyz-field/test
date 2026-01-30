@@ -793,7 +793,8 @@ And the <code>csi-attacher-*</code>    pod on <code>node-1</code> should be rest
 <p><strong>Note:</strong> In <code>node-1</code>, the other pods of the CSI sidecar components restarted
 are triggered by their internal <a href="https://github.com/kubernetes-csi/csi-lib-utils/blob/e085359dea1b0e9e49b02cb6bb30f33a80c6fe02/rpc/common.go#L109">ProbeForever</a>
 to the CSI connection. It is not due to the liveness probe of the
-<code>longhorn-csi-plugin</code>.</p></blockquote>
+<code>longhorn-csi-plugin</code>.</p>
+</blockquote>
 <p>And Longhorn CSI socket file should exist.</p>
 
     </article>

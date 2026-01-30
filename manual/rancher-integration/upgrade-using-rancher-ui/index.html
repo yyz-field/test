@@ -838,8 +838,8 @@
 <p><strong>Then</strong> Upgrade should be successful as the kubelet should restart</p>
 <p>AND No volume&rsquo;s data should be lost</p>
 <p><strong>Note</strong>: Below script can be used to kill kubelet continuously</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
+</span></span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> true; <span style="color:#66d9ef">do</span>
 </span></span><span style="display:flex;"><span> <span style="color:#75715e"># Find the process ID of the k3s kubelet</span>
 </span></span><span style="display:flex;"><span> pid<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>ps -ef | grep kubelet | grep -v grep | awk <span style="color:#e6db74">&#39;{print $2}&#39;</span><span style="color:#66d9ef">)</span>
