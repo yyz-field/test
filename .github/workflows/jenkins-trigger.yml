@@ -6,7 +6,7 @@ on:
 jobs:
   jenkins-test:
     # Only run if it's a Pull Request and the comment matches the trigger
-    if: github.event.issue.pull_request && contains(github.event.comment.body, '/jenkins test')
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/jenkins')
     runs-on: ubuntu-latest
     steps:
       - name: Trigger Jenkins via API
