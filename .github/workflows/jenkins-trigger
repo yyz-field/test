@@ -1,0 +1,22 @@
+name: Trigger Jenkins CI
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  jenkins-test:
+    # Only run if it's a Pull Request and the comment matches the trigger
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/jenkins test')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Jenkins via API
+        env:
+          JENKINS_URL: "ci.longhorn.io"
+          JENKINS_USER: ${{ secrets.JENKINS_USER }}
+          JENKINS_TOKEN: ${{ secrets.JENKINS_TOKEN }}
+          REMOTE_TOKEN: ${{ secrets.REMOTE_TOKEN }}
+        run: |
+          curl -X POST "https://$JENKINS_USER:$JENKINS_TOKEN@$JENKINS_URL/job/longhorn-e2e-test-pull-request-check/buildWithParameters" \
+            --data "token=$REMOTE_TOKEN" \
+            --data "LONGHORN_TESTS_CUSTOM_IMAGE=yangchiu/test-e2e" \
+            --data "CUSTOM_TEST_OPTIONS=-i \"volume-expansion\" -v RETRY_COUNT:1200 -v DATA_ENGINE:v1"
