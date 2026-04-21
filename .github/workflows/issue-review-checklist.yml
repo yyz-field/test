@@ -1,0 +1,142 @@
+name: Add Review Checklist Comment
+
+on:
+  projects_v2_item:
+    types: [edited]
+
+permissions:
+  issues: write
+  pull-requests: read
+  contents: read
+
+jobs:
+  add-review-checklist:
+    runs-on: ubuntu-latest
+
+    # Only run if Status field changed
+    if: >
+      github.event.changes.field_value.field_name == 'Status'
+
+    steps:
+      - name: Add checklist when moved to Review
+        uses: actions/github-script@v7
+        env:
+          TARGET_STATUS: Review
+          LONGHORN_PROJECT_NODE_ID: ${{ secrets.LONGHORN_PROJECT_NODE_ID }}
+        with:
+          script: |
+
+            const targetStatus = process.env.TARGET_STATUS;
+            const projectNodeId = process.env.LONGHORN_PROJECT_NODE_ID;
+
+            const item = context.payload.projects_v2_item;
+            const changes = context.payload.changes?.field_value;
+
+            // Ensure this is the correct project
+            if (item.project_node_id !== projectNodeId) {
+              core.info("Not target project, skipping");
+              return;
+            }
+
+            // Ensure new status is "Review"
+            const newStatus = changes?.to?.name;
+
+            if (newStatus !== targetStatus) {
+              core.info(`Status moved to ${newStatus}, not ${targetStatus}`);
+              return;
+            }
+
+            // Ensure linked content exists
+            const content = item.content;
+
+            if (!content) {
+              core.info("No linked content, skipping");
+              return;
+            }
+
+            // Only handle Issues (not PRs)
+            if (content.type !== "Issue") {
+              core.info("Not an issue, skipping");
+              return;
+            }
+
+            const issueNumber = content.number;
+
+            // ----------------------------------------
+            // Check if checklist already exists
+            // ----------------------------------------
+
+            const existingComments =
+              await github.paginate(
+                github.rest.issues.listComments,
+                {
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issueNumber,
+                  per_page: 100
+                }
+              );
+
+            const checklistHeader =
+              "## Pre Ready-For-Testing Checklist";
+
+            const alreadyExists =
+              existingComments.some(comment =>
+                comment.body.includes(checklistHeader)
+              );
+
+            if (alreadyExists) {
+              core.info("Checklist already exists, skipping");
+              return;
+            }
+
+            // ----------------------------------------
+            // Comment body
+            // ----------------------------------------
+
+            const body = `
+## Pre Ready-For-Testing Checklist
+* [ ] **Context & Reproduction**
+    Where are the reproduction or test steps documented?
+    Link:
+
+* [ ] **Workaround**
+    Is there a workaround for the issue? If yes, where is it documented?
+    Link:
+
+* [ ] **Fix / Feature Explanation**
+    Does the PR include a clear explanation of the fix or the new feature?
+
+* [ ] **Code Changes**
+    Have all required code changes been merged?
+    PR(s):
+
+* [ ] **Deployment Changes (YAML / Helm Chart)**
+    Does the PR introduce any deployment changes?
+    PR:
+
+* [ ] **Longhorn Enhancement Proposal (LEP)** *(if labeled \`require/LEP\`)*
+    Has the LEP PR been submitted?
+    PR:
+
+* [ ] **Documentation Updates** *(if labeled \`require/doc\`)*
+    Has the required documentation PR been submitted or merged?
+    PR:
+
+* [ ] **Manual Test Plan** *(if labeled \`require/manual-test-plan\`)*
+    Has the manual test plan been documented?
+    Link:
+`;
+
+            // ----------------------------------------
+            // Create comment
+            // ----------------------------------------
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body
+            });
+
+            core.info("Checklist comment added.");
