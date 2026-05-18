@@ -16,7 +16,7 @@ jobs:
 
       - name: Check if PR is a backport
         run: |
-          if [[ "${{ github.event.pull_request.title }}" =~ "backport #" ]]; then
+          if [[ "$(echo "${{ github.event.pull_request.title }}" | sed 's/"/\\"/g')" =~ "backport #" ]]; then
             echo "BACKPORT=true" >> $GITHUB_ENV
           else
             echo "BACKPORT=false" >> $GITHUB_ENV
@@ -61,5 +61,6 @@ jobs:
           gh issue comment --repo yyz-field/test ${{ env.BACKPORT_ISSUE_NUMBER }} --body "Related PR: ${{ github.event.pull_request.html_url }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
 
