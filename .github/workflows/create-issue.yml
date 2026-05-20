@@ -16,16 +16,21 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
     - name: Check if Automation Issue Exists
       if: fromJSON(steps.is-longhorn-member.outputs.teams)[0] != null
-      uses: actions-cool/issues-helper@v3
       id: if-automation-issue-exists
-      with:
-        actions: 'find-issues'
-        token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
-        issue-state: 'all'
-        labels: 'kind/test'
-        issue-creator: 'github-actions[bot]'
-        title-includes: |
-          [TEST]${{ github.event.issue.title }}
+      env:
+        GH_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+        ISSUE_TITLE: ${{ github.event.issue.title }}
+      run: |
+        EXPECTED_TITLE="[TEST]${ISSUE_TITLE}"
+        RAW_ISSUES=$(gh api "repos/${GITHUB_REPOSITORY}/issues" \
+          --paginate \
+          --slurp \
+          --raw-field state=all \
+          --raw-field labels=kind/test \
+          --raw-field creator='github-actions[bot]' \
+          --raw-field per_page=100)
+        ISSUES=$(echo "$RAW_ISSUES" | jq -c --arg expected "$EXPECTED_TITLE" '[.[][] | select(.title | contains($expected))]')
+        echo "issues=$ISSUES" >> "$GITHUB_OUTPUT"
     - name: Create Automation Test Issue
       if: fromJSON(steps.is-longhorn-member.outputs.teams)[0] != null && fromJSON(steps.if-automation-issue-exists.outputs.issues)[0] == null
       uses: dacbd/create-issue-action@v1
@@ -60,16 +65,21 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
     - name: Check if UI Issue Exists
       if: fromJSON(steps.is-longhorn-member.outputs.teams)[0] != null
-      uses: actions-cool/issues-helper@v3
       id: if-ui-issue-exists
-      with:
-        actions: 'find-issues'
-        token: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
-        issue-state: 'all'
-        labels: 'area/ui'
-        issue-creator: 'github-actions[bot]'
-        title-includes: |
-          [UI]${{ github.event.issue.title }}
+      env:
+        GH_TOKEN: ${{ secrets.CUSTOM_GITHUB_TOKEN }}
+        ISSUE_TITLE: ${{ github.event.issue.title }}
+      run: |
+        EXPECTED_TITLE="[UI]${ISSUE_TITLE}"
+        RAW_ISSUES=$(gh api "repos/${GITHUB_REPOSITORY}/issues" \
+          --paginate \
+          --slurp \
+          --raw-field state=all \
+          --raw-field labels=area/ui \
+          --raw-field creator='github-actions[bot]' \
+          --raw-field per_page=100)
+        ISSUES=$(echo "$RAW_ISSUES" | jq -c --arg expected "$EXPECTED_TITLE" '[.[][] | select(.title | contains($expected))]')
+        echo "issues=$ISSUES" >> "$GITHUB_OUTPUT"
     - name: Get Labels
       if: fromJSON(steps.is-longhorn-member.outputs.teams)[0] != null && fromJSON(steps.if-ui-issue-exists.outputs.issues)[0] == null
       id: labels
