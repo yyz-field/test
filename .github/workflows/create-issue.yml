@@ -29,7 +29,7 @@ jobs:
           --raw-field labels=kind/test \
           --raw-field creator='github-actions[bot]' \
           --raw-field per_page=100)
-        ISSUES=$(echo "$RAW_ISSUES" | jq -c --arg expected "$EXPECTED_TITLE" '[.[][] | select(.title | contains($expected))]')
+        ISSUES=$(echo "$RAW_ISSUES" | jq -c --arg expected "$EXPECTED_TITLE" '[.[][] | select(.title == $expected)]')
         echo "issues=$ISSUES" >> "$GITHUB_OUTPUT"
     - name: Create Automation Test Issue
       if: fromJSON(steps.is-longhorn-member.outputs.teams)[0] != null && fromJSON(steps.if-automation-issue-exists.outputs.issues)[0] == null
@@ -78,7 +78,7 @@ jobs:
           --raw-field labels=area/ui \
           --raw-field creator='github-actions[bot]' \
           --raw-field per_page=100)
-        ISSUES=$(echo "$RAW_ISSUES" | jq -c --arg expected "$EXPECTED_TITLE" '[.[][] | select(.title | contains($expected))]')
+        ISSUES=$(echo "$RAW_ISSUES" | jq -c --arg expected "$EXPECTED_TITLE" '[.[][] | select(.title == $expected)]')
         echo "issues=$ISSUES" >> "$GITHUB_OUTPUT"
     - name: Get Labels
       if: fromJSON(steps.is-longhorn-member.outputs.teams)[0] != null && fromJSON(steps.if-ui-issue-exists.outputs.issues)[0] == null
