@@ -26,8 +26,14 @@ jobs:
       id: if-backport-issue-exists
       env:
         GH_TOKEN: ${{ github.token }}
+        BACKPORT_VERSION: ${{ steps.split.outputs._1 }}
+        ISSUE_TITLE: ${{ github.event.issue.title }}
       run: |
-        QUERY="repo:${GITHUB_REPOSITORY} is:issue label:\"kind/backport\" author:\"github-actions[bot]\" in:title \"[BACKPORT][v${{ steps.split.outputs._1 }}]${{ github.event.issue.title }}\""
+        QUERY=$(jq -rn \
+          --arg repo "${GITHUB_REPOSITORY}" \
+          --arg version "${BACKPORT_VERSION}" \
+          --arg title "${ISSUE_TITLE}" \
+          '"repo:\($repo) is:issue state:all label:\"kind/backport\" author:\"github-actions[bot]\" in:title \"[BACKPORT][v\($version)]\($title)\""')
         ISSUES=$(gh api search/issues -f q="$QUERY" --jq '.items')
         echo "issues=$ISSUES" >> "$GITHUB_OUTPUT"
     - name: Get Milestone Object
