@@ -23,16 +23,22 @@ jobs:
         separator: /
     - name: Check if Backport Issue Exists
       if: fromJSON(steps.is-longhorn-member.outputs.teams)[0] != null
-      uses: actions-cool/issues-helper@v3
       id: if-backport-issue-exists
-      with:
-        actions: 'find-issues'
-        token: ${{ github.token }}
-        issue-state: 'all'
-        labels: 'kind/backport'
-        issue-creator: 'github-actions[bot]'
-        title-includes: |
-          [BACKPORT][v${{ steps.split.outputs._1 }}]${{ github.event.issue.title }}
+      env:
+        GH_TOKEN: ${{ github.token }}
+        BACKPORT_VERSION: ${{ steps.split.outputs._1 }}
+        ISSUE_TITLE: ${{ github.event.issue.title }}
+      run: |
+        EXPECTED_TITLE="[BACKPORT][v${BACKPORT_VERSION}]${ISSUE_TITLE}"
+        RAW_ISSUES=$(gh api "repos/${GITHUB_REPOSITORY}/issues" \
+          --paginate \
+          --slurp \
+          --raw-field state=all \
+          --raw-field labels=kind/backport \
+          --raw-field creator='github-actions[bot]' \
+          --raw-field per_page=100)
+        ISSUES=$(echo "$RAW_ISSUES" | jq -c --arg expected "$EXPECTED_TITLE" '[.[][] | select(.title | contains($expected))]')
+        echo "issues=$ISSUES" >> "$GITHUB_OUTPUT"
     - name: Get Milestone Object
       if: fromJSON(steps.is-longhorn-member.outputs.teams)[0] != null && fromJSON(steps.if-backport-issue-exists.outputs.issues)[0] == null
       uses: longhorn/bot/milestone-action@master
