@@ -33,8 +33,9 @@ jobs:
           --arg repo "${GITHUB_REPOSITORY}" \
           --arg version "${BACKPORT_VERSION}" \
           --arg title "${ISSUE_TITLE}" \
-          '"repo:\($repo) is:issue state:all label:\"kind/backport\" author:\"github-actions[bot]\" in:title \"[BACKPORT][v\($version)]\($title)\""')
-        ISSUES=$(gh api search/issues -f q="$QUERY" --jq '.items')
+          '($title | gsub("\\\\"; "\\\\\\\\") | gsub("\""; "\\\"")) as $safeTitle
+          | "repo:\($repo) is:issue state:all label:\"kind/backport\" author:\"github-actions[bot]\" in:title \"[BACKPORT][v\($version)]\($safeTitle)\""')
+        ISSUES=$(gh api search/issues --raw-field q="$QUERY" --jq '.items')
         echo "issues=$ISSUES" >> "$GITHUB_OUTPUT"
     - name: Get Milestone Object
       if: fromJSON(steps.is-longhorn-member.outputs.teams)[0] != null && fromJSON(steps.if-backport-issue-exists.outputs.issues)[0] == null
