@@ -29,13 +29,15 @@ jobs:
         BACKPORT_VERSION: ${{ steps.split.outputs._1 }}
         ISSUE_TITLE: ${{ github.event.issue.title }}
       run: |
-        QUERY=$(jq -rn \
-          --arg repo "${GITHUB_REPOSITORY}" \
-          --arg version "${BACKPORT_VERSION}" \
-          --arg title "${ISSUE_TITLE}" \
-          '($title | gsub("\\\\"; "\\\\\\\\") | gsub("\""; "\\\"")) as $safeTitle
-          | "repo:\($repo) is:issue state:all label:\"kind/backport\" author:\"github-actions[bot]\" in:title \"[BACKPORT][v\($version)]\($safeTitle)\""')
-        ISSUES=$(gh api search/issues --raw-field q="$QUERY" --jq '.items')
+        EXPECTED_TITLE="[BACKPORT][v${BACKPORT_VERSION}]${ISSUE_TITLE}"
+        RAW_ISSUES=$(gh api "repos/${GITHUB_REPOSITORY}/issues" \
+          --paginate \
+          --slurp \
+          --raw-field state=all \
+          --raw-field labels=kind/backport \
+          --raw-field creator='github-actions[bot]' \
+          --raw-field per_page=100)
+        ISSUES=$(echo "$RAW_ISSUES" | jq -c --arg expected "$EXPECTED_TITLE" '[.[][] | select(.title | contains($expected))]')
         echo "issues=$ISSUES" >> "$GITHUB_OUTPUT"
     - name: Get Milestone Object
       if: fromJSON(steps.is-longhorn-member.outputs.teams)[0] != null && fromJSON(steps.if-backport-issue-exists.outputs.issues)[0] == null
