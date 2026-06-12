@@ -1,9 +1,9 @@
-registry.suse.de/devel/tulip/containers/1.10.x/mr-58/containers/longhorn-backing-image-manager:1.10.4-rc1
-registry.suse.de/devel/tulip/containers/1.10.x/mr-58/containers/longhorn-engine:1.10.4-rc1
-registry.suse.de/devel/tulip/containers/1.10.x/mr-58/containers/longhorn-instance-manager:1.10.4-rc1
-registry.suse.de/devel/tulip/containers/1.10.x/mr-58/containers/longhorn-manager:1.10.4-rc1
-registry.suse.de/devel/tulip/containers/1.10.x/mr-58/containers/longhorn-share-manager:1.10.4-rc1
-registry.suse.de/devel/tulip/containers/1.10.x/mr-58/containers/longhorn-ui:1.10.4-rc1
+registry.suse.de/devel/tulip/containers/1.10.x/mr-58/containers/longhorn-backing-image-manager:1.10.4
+registry.suse.de/devel/tulip/containers/1.10.x/mr-58/containers/longhorn-engine:1.10.4
+registry.suse.de/devel/tulip/containers/1.10.x/mr-58/containers/longhorn-instance-manager:1.10.4
+registry.suse.de/devel/tulip/containers/1.10.x/mr-58/containers/longhorn-manager:1.10.4
+registry.suse.de/devel/tulip/containers/1.10.x/mr-58/containers/longhorn-share-manager:1.10.4
+registry.suse.de/devel/tulip/containers/1.10.x/mr-58/containers/longhorn-ui:1.10.4
 dp.apps.rancher.io/containers/kubernetes-csi-external-attacher:4.12.0-14.1
 dp.apps.rancher.io/containers/kubernetes-csi-external-provisioner:5.3.0-14.1
 dp.apps.rancher.io/containers/kubernetes-csi-external-resizer:1.14.0-14.1
